@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{54DB17A8-DD98-4960-8B99-043395CEB9FC}"
+	ProjectSection(SolutionItems) = preProject
+		Northwind.Data\instnwnd.sql = Northwind.Data\instnwnd.sql
+		Northwind.Data\northwnd.mdf = Northwind.Data\northwnd.mdf
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.EF6Models", "Northwind.EF6Models\Northwind.EF6Models.csproj", "{E431F451-C31B-4651-A84C-5EF2A9D2B494}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{23A8C879-1903-40E8-B409-641FCD46357B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{20F002DA-9CB0-4B76-A694-CE3C4655B3E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{C581D206-5CEB-4227-BC2D-4C1CA0F00480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WpfClient", "Northwind.WpfClient\Northwind.WpfClient.csproj", "{1D995BA6-7754-43D2-B87D-D8293EEF61F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WebApi2Services", "Northwind.WebApi2Services\Northwind.WebApi2Services.csproj", "{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Common", "Northwind.Common\Northwind.Common.csproj", "{F6C8399B-C78F-46E3-B0A8-DA8779A040A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB92432E-7262-4EF2-BDB9-E7EA5C851F43}"
+	ProjectSection(SolutionItems) = preProject
+		poi.txt = poi.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WebApi2Services.Dto", "Northwind.WebApi2Services.Dto\Northwind.WebApi2Services.Dto.csproj", "{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E431F451-C31B-4651-A84C-5EF2A9D2B494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E431F451-C31B-4651-A84C-5EF2A9D2B494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E431F451-C31B-4651-A84C-5EF2A9D2B494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E431F451-C31B-4651-A84C-5EF2A9D2B494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D995BA6-7754-43D2-B87D-D8293EEF61F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D995BA6-7754-43D2-B87D-D8293EEF61F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D995BA6-7754-43D2-B87D-D8293EEF61F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D995BA6-7754-43D2-B87D-D8293EEF61F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C8399B-C78F-46E3-B0A8-DA8779A040A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C8399B-C78F-46E3-B0A8-DA8779A040A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C8399B-C78F-46E3-B0A8-DA8779A040A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C8399B-C78F-46E3-B0A8-DA8779A040A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E431F451-C31B-4651-A84C-5EF2A9D2B494} = {23A8C879-1903-40E8-B409-641FCD46357B}
+		{FBE7E7DD-53D5-4480-8844-B48CE46FE6F2} = {20F002DA-9CB0-4B76-A694-CE3C4655B3E2}
+		{E27DC6B7-A2EC-457F-96C2-C705FDBE01FA} = {20F002DA-9CB0-4B76-A694-CE3C4655B3E2}
+		{1D995BA6-7754-43D2-B87D-D8293EEF61F7} = {C581D206-5CEB-4227-BC2D-4C1CA0F00480}
+	EndGlobalSection
+EndGlobal

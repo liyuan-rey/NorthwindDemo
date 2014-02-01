@@ -1,0 +1,19 @@
+
+Point Of Interesting
+==========================================
+
+1. Server
+-------------------
+* exception process with UnhandledExceptionFilter attribute
+* custom defined object mapping and ModelMapper class
+* usage of AutoMapper and AutoMapperConfiguration class
+* CRUD in WebAPI with different DTO type
+* update data in WebAPI with specified properties
+
+
+2. WPF Client
+-------------------
+* INotifyPropertyChanged implemented in extension way, eg. PropertyChangedEventHandlerExtensions class
+* a RelayCommand implementation, with IActiveAware interface
+* a util that can be helpful when convert between string and property-selector
+* 
