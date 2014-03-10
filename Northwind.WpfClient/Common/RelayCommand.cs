@@ -3,7 +3,6 @@
 namespace Northwind.WpfClient.Common
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Windows.Input;
     using System.Windows.Threading;
     using Northwind.Common;
@@ -42,14 +41,10 @@ namespace Northwind.WpfClient.Common
         public virtual bool CanExecute(object parameter)
         {
             if (_isActive)
-            {
                 return false;
-            }
 
             if (_canExecute == null)
-            {
                 return true;
-            }
 
             try
             {
@@ -111,9 +106,7 @@ namespace Northwind.WpfClient.Common
                 _isActive = value;
 
                 if (IsActiveChanged != null)
-                {
                     IsActiveChanged(this, new EventArgs());
-                }
             }
         }
 

@@ -22,9 +22,7 @@ namespace Northwind.WpfClient.Common
         {
             Action<object> action = null;
             if (!ignoreCancellation)
-            {
                 action = param => execute(param);
-            }
 
             action = param => FireAndForget(execute, param);
 

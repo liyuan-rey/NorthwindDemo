@@ -18,34 +18,24 @@ namespace Northwind.WpfClient.Common
             ContractUtil.RequiresNotNull(propertySelector, "propertySelector");
 
             if (propertyChanged == null)
-            {
                 return;
-            }
 
             var lambda = propertySelector as LambdaExpression;
             MemberExpression memberExpr;
             var body = lambda.Body as UnaryExpression;
             if (body != null)
-            {
                 memberExpr = body.Operand as MemberExpression;
-            }
             else
-            {
                 memberExpr = lambda.Body as MemberExpression;
-            }
 
             if (memberExpr == null)
-            {
                 throw new ArgumentException(InvalidPropertySelectorExpression, "propertySelector");
-            }
 
             var constExpr = memberExpr.Expression as ConstantExpression;
             var propInfo = memberExpr.Member as PropertyInfo;
 
             if (constExpr == null || propInfo == null)
-            {
                 throw new ArgumentException(InvalidPropertySelectorExpression, "propertySelector");
-            }
 
             foreach (Delegate delegat in propertyChanged.GetInvocationList())
             {

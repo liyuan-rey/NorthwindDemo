@@ -7,8 +7,8 @@ namespace Northwind.WebApi2Services.Models
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Dto;
-    using EF6Models;
+    using Northwind.EF6Models;
+    using Northwind.WebApi2Services.Dto;
 
     public class ModelMapper
     {
@@ -84,12 +84,14 @@ namespace Northwind.WebApi2Services.Models
                 PropertyInfo srcPropInfo = srcProps.FirstOrDefault(pi => string.Compare(pi.Name, p, true) == 0);
                 PropertyInfo destPropInfo = destProps.FirstOrDefault(pi => string.Compare(pi.Name, p, true) == 0);
                 if (srcPropInfo != null && destPropInfo != null)
+                {
                     return new
                     {
                         propName = p,
                         srcProp = srcPropInfo,
                         destProp = destPropInfo
                     };
+                }
 
                 return null;
             });

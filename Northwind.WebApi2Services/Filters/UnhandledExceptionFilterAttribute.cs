@@ -24,20 +24,19 @@ namespace Northwind.WebApi2Services.Filters
         ///     A <see cref="Func{T1,T2,TResult}" /> delegate method that returns
         ///     an <see cref="HttpResponseMessage" /> that describes the supplied exception.
         /// </value>
-        private static readonly Func<Exception, HttpRequestMessage, HttpResponseMessage> DefaultHandler = (exception, request) =>
-        {
-            if (exception == null)
+        private static readonly Func<Exception, HttpRequestMessage, HttpResponseMessage> DefaultHandler =
+            (exception, request) =>
             {
-                return null;
-            }
+                if (exception == null)
+                    return null;
 
-            HttpResponseMessage response = request.CreateResponse(
-                HttpStatusCode.InternalServerError, GetContentOf(exception)
-                );
-            response.ReasonPhrase = exception.Message.Replace(Environment.NewLine, String.Empty);
+                HttpResponseMessage response = request.CreateResponse(
+                    HttpStatusCode.InternalServerError, GetContentOf(exception)
+                    );
+                response.ReasonPhrase = exception.Message.Replace(Environment.NewLine, String.Empty);
 
-            return response;
-        };
+                return response;
+            };
 
         #endregion
 
@@ -53,9 +52,7 @@ namespace Northwind.WebApi2Services.Filters
         private static readonly Func<Exception, string> GetContentOf = exception =>
         {
             if (exception == null)
-            {
                 return String.Empty;
-            }
 
             var result = new StringBuilder();
 
@@ -81,7 +78,7 @@ namespace Northwind.WebApi2Services.Filters
 
         #region Handlers
 
-        private readonly 
+        private readonly
             ConcurrentDictionary<Type, Tuple<HttpStatusCode?, Func<Exception, HttpRequestMessage, HttpResponseMessage>>>
             _filterHandlers =
                 new ConcurrentDictionary
@@ -112,9 +109,7 @@ namespace Northwind.WebApi2Services.Filters
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
             if (actionExecutedContext == null || actionExecutedContext.Exception == null)
-            {
                 return;
-            }
 
             Type type = actionExecutedContext.Exception.GetType();
 
@@ -132,9 +127,7 @@ namespace Northwind.WebApi2Services.Filters
 
                 // Use registered status code if available
                 if (statusCode.HasValue)
-                {
                     response.StatusCode = statusCode.Value;
-                }
 
                 actionExecutedContext.Response = response;
             }
@@ -173,9 +166,7 @@ namespace Northwind.WebApi2Services.Filters
                 Tuple<HttpStatusCode?, Func<Exception, HttpRequestMessage, HttpResponseMessage>> oldItem;
 
                 if (Handlers.TryRemove(type, out oldItem))
-                {
                     Handlers.TryAdd(type, item);
-                }
             }
 
             return this;
@@ -201,9 +192,7 @@ namespace Northwind.WebApi2Services.Filters
             where TException : Exception
         {
             if (handler == null)
-            {
                 throw new ArgumentNullException("handler");
-            }
 
             Type type = typeof (TException);
             var item = new Tuple<HttpStatusCode?, Func<Exception, HttpRequestMessage, HttpResponseMessage>>(
@@ -215,9 +204,7 @@ namespace Northwind.WebApi2Services.Filters
                 Tuple<HttpStatusCode?, Func<Exception, HttpRequestMessage, HttpResponseMessage>> oldItem;
 
                 if (Handlers.TryRemove(type, out oldItem))
-                {
                     Handlers.TryAdd(type, item);
-                }
             }
 
             return this;

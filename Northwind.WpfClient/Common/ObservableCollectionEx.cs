@@ -12,9 +12,7 @@ namespace Northwind.WpfClient.Common
         {
             Items.Clear();
             foreach (T p in products)
-            {
                 Items.Add(p);
-            }
 
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

@@ -13,7 +13,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3">
             <Button Width="75" Height="28" Command="{Binding LoadCategoryCommand}"
                     Content="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
@@ -21,7 +21,6 @@
 
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding CategoryList}" />
         <GridSplitter Width="3" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" />
-        <DataGrid Grid.Row="1" Grid.Column="2">
-        </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="2" />
     </Grid>
 </Window>

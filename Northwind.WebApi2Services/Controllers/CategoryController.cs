@@ -10,10 +10,10 @@ namespace Northwind.WebApi2Services.Controllers
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using Dto;
-    using EF6Models;
-    using Filters;
-    using Models;
+    using Northwind.EF6Models;
+    using Northwind.WebApi2Services.Dto;
+    using Northwind.WebApi2Services.Filters;
+    using Northwind.WebApi2Services.Models;
 
     [UnhandledExceptionFilter]
     public class CategoryController : ApiController
@@ -23,8 +23,12 @@ namespace Northwind.WebApi2Services.Controllers
         {
             using (var ctx = new NorthwindContext())
             {
-                List<CategoryListItemDto> result = await ctx.Categories.AsNoTracking()
-                    .Select(ModelMapper.Category2CategoryListDto).ToListAsync();
+                ctx.Configuration.ProxyCreationEnabled = false;
+
+                List<CategoryListItemDto> result = 
+                    await ctx.Categories
+                             .Select(ModelMapper.Category2CategoryListDto)
+                             .ToListAsync();
 
                 return result;
             }
@@ -36,8 +40,8 @@ namespace Northwind.WebApi2Services.Controllers
             using (var ctx = new NorthwindContext())
             {
                 CategoryListItemDto result = await ctx.Categories.AsNoTracking()
-                    .Select(ModelMapper.Category2CategoryListDto)
-                    .FirstOrDefaultAsync(c => c.CategoryId == id);
+                                                      .Select(ModelMapper.Category2CategoryListDto)
+                                                      .FirstOrDefaultAsync(c => c.CategoryId == id);
 
                 if (result == null)
                 {
@@ -86,7 +90,7 @@ namespace Northwind.WebApi2Services.Controllers
                 ctx.Categories.Attach(categoty);
 
                 value.UpdatedProperties.ForEach(prop =>
-                    ctx.Entry(categoty).Property(prop).IsModified = true);
+                                                ctx.Entry(categoty).Property(prop).IsModified = true);
 
                 await ctx.SaveChangesAsync();
             }

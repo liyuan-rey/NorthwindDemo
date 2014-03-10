@@ -16,4 +16,5 @@ Point Of Interesting
 * INotifyPropertyChanged implemented in extension way, eg. PropertyChangedEventHandlerExtensions class
 * a RelayCommand implementation, with IActiveAware interface
 * a util that can be helpful when convert between string and property-selector
+* using application settings
 * using Reactive Extension to handle event

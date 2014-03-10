@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Routing;
+﻿// Global.asax.cs
 
 namespace Northwind.WebApi2Services
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    using System.Web;
+    using System.Web.Http;
+
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {

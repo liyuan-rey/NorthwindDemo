@@ -20,6 +20,9 @@ namespace Northwind.EF6Models
         public NorthwindContext()
             : base("name=NorthwindContext")
         {
+            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.AutoDetectChangesEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

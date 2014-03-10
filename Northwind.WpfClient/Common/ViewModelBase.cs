@@ -18,9 +18,7 @@ namespace Northwind.WpfClient.Common
             Dispatcher.CurrentDispatcher.VerifyAccess();
 
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -70,17 +68,11 @@ namespace Northwind.WpfClient.Common
 
             var equatable = value as IEquatable<T>;
             if (equatable != null)
-            {
                 flag = equatable.Equals(propertyDataField);
-            }
             else if (typeof (T).IsSubclassOf(typeof (Enum)))
-            {
                 flag = Equals(value, propertyDataField);
-            }
             else
-            {
                 flag = ReferenceEquals(value, propertyDataField);
-            }
 
             if (!flag)
             {

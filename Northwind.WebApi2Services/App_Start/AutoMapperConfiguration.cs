@@ -2,7 +2,6 @@
 
 namespace Northwind.WebApi2Services
 {
-    using System;
     using AutoMapper;
 
     public class AutoMapperConfiguration

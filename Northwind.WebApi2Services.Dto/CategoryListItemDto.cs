@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// CategoryListItemDto.cs
 
 namespace Northwind.WebApi2Services.Dto
 {

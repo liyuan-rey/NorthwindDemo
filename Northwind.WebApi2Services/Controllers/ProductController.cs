@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿// ProductController.cs
 
 namespace Northwind.WebApi2Services.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+
     public class ProductController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            return new[] {"value1", "value2"};
+            return new[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5

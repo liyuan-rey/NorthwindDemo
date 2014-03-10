@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Northwind.EF6Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Northwind.EF6Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -553,32 +556,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="CustOrderHist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="CustOrderHist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false"
+                  ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerID" Type="nchar" Mode="In" />
         </Function>
-        <Function Name="CustOrdersDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="CustOrdersDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false"
+                  IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderID" Type="int" Mode="In" />
         </Function>
-        <Function Name="CustOrdersOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="CustOrdersOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false"
+                  IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerID" Type="nchar" Mode="In" />
         </Function>
-        <Function Name="Employee_Sales_by_Country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Employee Sales by Country">
+        <Function Name="Employee_Sales_by_Country" Aggregate="false" BuiltIn="false" NiladicFunction="false"
+                  IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo"
+                  StoreFunctionName="Employee Sales by Country">
           <Parameter Name="Beginning_Date" Type="datetime" Mode="In" />
           <Parameter Name="Ending_Date" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="Sales_by_Year" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Sales by Year">
+        <Function Name="Sales_by_Year" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false"
+                  ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Sales by Year">
           <Parameter Name="Beginning_Date" Type="datetime" Mode="In" />
           <Parameter Name="Ending_Date" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="SalesByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="SalesByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false"
+                  ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
           <Parameter Name="OrdYear" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="Ten_Most_Expensive_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Ten Most Expensive Products" />
+        <Function Name="Ten_Most_Expensive_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false"
+                  IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo"
+                  StoreFunctionName="Ten Most Expensive Products" />
         <EntityContainer Name="NorthwindEF6ModelsStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomerCustomerDemo" EntityType="Self.CustomerCustomerDemo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerCustomerDemo" EntityType="Self.CustomerCustomerDemo" Schema="dbo"
+                     store:Type="Tables" />
+          <EntitySet Name="CustomerDemographics" EntityType="Self.CustomerDemographics" Schema="dbo"
+                     store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeTerritories" EntityType="Self.EmployeeTerritories" Schema="dbo" store:Type="Tables" />
@@ -589,163 +603,204 @@
           <EntitySet Name="Shippers" EntityType="Self.Shippers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Territories" EntityType="Self.Territories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Alphabetical list of products" EntityType="Self.Alphabetical list of products" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Alphabetical list of products].[ProductID] AS [ProductID], 
-    [Alphabetical list of products].[ProductName] AS [ProductName], 
-    [Alphabetical list of products].[SupplierID] AS [SupplierID], 
-    [Alphabetical list of products].[CategoryID] AS [CategoryID], 
-    [Alphabetical list of products].[QuantityPerUnit] AS [QuantityPerUnit], 
-    [Alphabetical list of products].[UnitPrice] AS [UnitPrice], 
-    [Alphabetical list of products].[UnitsInStock] AS [UnitsInStock], 
-    [Alphabetical list of products].[UnitsOnOrder] AS [UnitsOnOrder], 
-    [Alphabetical list of products].[ReorderLevel] AS [ReorderLevel], 
-    [Alphabetical list of products].[Discontinued] AS [Discontinued], 
-    [Alphabetical list of products].[CategoryName] AS [CategoryName]
-    FROM [dbo].[Alphabetical list of products] AS [Alphabetical list of products]</DefiningQuery>
+          <EntitySet Name="Alphabetical list of products" EntityType="Self.Alphabetical list of products"
+                     store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Alphabetical list of products].[ProductID] AS [ProductID],
+              [Alphabetical list of products].[ProductName] AS [ProductName],
+              [Alphabetical list of products].[SupplierID] AS [SupplierID],
+              [Alphabetical list of products].[CategoryID] AS [CategoryID],
+              [Alphabetical list of products].[QuantityPerUnit] AS [QuantityPerUnit],
+              [Alphabetical list of products].[UnitPrice] AS [UnitPrice],
+              [Alphabetical list of products].[UnitsInStock] AS [UnitsInStock],
+              [Alphabetical list of products].[UnitsOnOrder] AS [UnitsOnOrder],
+              [Alphabetical list of products].[ReorderLevel] AS [ReorderLevel],
+              [Alphabetical list of products].[Discontinued] AS [Discontinued],
+              [Alphabetical list of products].[CategoryName] AS [CategoryName]
+              FROM [dbo].[Alphabetical list of products] AS [Alphabetical list of products]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Category Sales for 1997" EntityType="Self.Category Sales for 1997" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Category Sales for 1997].[CategoryName] AS [CategoryName], 
-    [Category Sales for 1997].[CategorySales] AS [CategorySales]
-    FROM [dbo].[Category Sales for 1997] AS [Category Sales for 1997]</DefiningQuery>
+          <EntitySet Name="Category Sales for 1997" EntityType="Self.Category Sales for 1997" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Category Sales for 1997].[CategoryName] AS [CategoryName],
+              [Category Sales for 1997].[CategorySales] AS [CategorySales]
+              FROM [dbo].[Category Sales for 1997] AS [Category Sales for 1997]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Current Product List" EntityType="Self.Current Product List" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Current Product List].[ProductID] AS [ProductID], 
-    [Current Product List].[ProductName] AS [ProductName]
-    FROM [dbo].[Current Product List] AS [Current Product List]</DefiningQuery>
+          <EntitySet Name="Current Product List" EntityType="Self.Current Product List" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Current Product List].[ProductID] AS [ProductID],
+              [Current Product List].[ProductName] AS [ProductName]
+              FROM [dbo].[Current Product List] AS [Current Product List]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Customer and Suppliers by City" EntityType="Self.Customer and Suppliers by City" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Customer and Suppliers by City].[City] AS [City], 
-    [Customer and Suppliers by City].[CompanyName] AS [CompanyName], 
-    [Customer and Suppliers by City].[ContactName] AS [ContactName], 
-    [Customer and Suppliers by City].[Relationship] AS [Relationship]
-    FROM [dbo].[Customer and Suppliers by City] AS [Customer and Suppliers by City]</DefiningQuery>
+          <EntitySet Name="Customer and Suppliers by City" EntityType="Self.Customer and Suppliers by City"
+                     store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Customer and Suppliers by City].[City] AS [City],
+              [Customer and Suppliers by City].[CompanyName] AS [CompanyName],
+              [Customer and Suppliers by City].[ContactName] AS [ContactName],
+              [Customer and Suppliers by City].[Relationship] AS [Relationship]
+              FROM [dbo].[Customer and Suppliers by City] AS [Customer and Suppliers by City]
+            </DefiningQuery>
           </EntitySet>
           <EntitySet Name="Invoices" EntityType="Self.Invoices" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Invoices].[ShipName] AS [ShipName], 
-    [Invoices].[ShipAddress] AS [ShipAddress], 
-    [Invoices].[ShipCity] AS [ShipCity], 
-    [Invoices].[ShipRegion] AS [ShipRegion], 
-    [Invoices].[ShipPostalCode] AS [ShipPostalCode], 
-    [Invoices].[ShipCountry] AS [ShipCountry], 
-    [Invoices].[CustomerID] AS [CustomerID], 
-    [Invoices].[CustomerName] AS [CustomerName], 
-    [Invoices].[Address] AS [Address], 
-    [Invoices].[City] AS [City], 
-    [Invoices].[Region] AS [Region], 
-    [Invoices].[PostalCode] AS [PostalCode], 
-    [Invoices].[Country] AS [Country], 
-    [Invoices].[Salesperson] AS [Salesperson], 
-    [Invoices].[OrderID] AS [OrderID], 
-    [Invoices].[OrderDate] AS [OrderDate], 
-    [Invoices].[RequiredDate] AS [RequiredDate], 
-    [Invoices].[ShippedDate] AS [ShippedDate], 
-    [Invoices].[ShipperName] AS [ShipperName], 
-    [Invoices].[ProductID] AS [ProductID], 
-    [Invoices].[ProductName] AS [ProductName], 
-    [Invoices].[UnitPrice] AS [UnitPrice], 
-    [Invoices].[Quantity] AS [Quantity], 
-    [Invoices].[Discount] AS [Discount], 
-    [Invoices].[ExtendedPrice] AS [ExtendedPrice], 
-    [Invoices].[Freight] AS [Freight]
-    FROM [dbo].[Invoices] AS [Invoices]</DefiningQuery>
+            <DefiningQuery>
+              SELECT
+              [Invoices].[ShipName] AS [ShipName],
+              [Invoices].[ShipAddress] AS [ShipAddress],
+              [Invoices].[ShipCity] AS [ShipCity],
+              [Invoices].[ShipRegion] AS [ShipRegion],
+              [Invoices].[ShipPostalCode] AS [ShipPostalCode],
+              [Invoices].[ShipCountry] AS [ShipCountry],
+              [Invoices].[CustomerID] AS [CustomerID],
+              [Invoices].[CustomerName] AS [CustomerName],
+              [Invoices].[Address] AS [Address],
+              [Invoices].[City] AS [City],
+              [Invoices].[Region] AS [Region],
+              [Invoices].[PostalCode] AS [PostalCode],
+              [Invoices].[Country] AS [Country],
+              [Invoices].[Salesperson] AS [Salesperson],
+              [Invoices].[OrderID] AS [OrderID],
+              [Invoices].[OrderDate] AS [OrderDate],
+              [Invoices].[RequiredDate] AS [RequiredDate],
+              [Invoices].[ShippedDate] AS [ShippedDate],
+              [Invoices].[ShipperName] AS [ShipperName],
+              [Invoices].[ProductID] AS [ProductID],
+              [Invoices].[ProductName] AS [ProductName],
+              [Invoices].[UnitPrice] AS [UnitPrice],
+              [Invoices].[Quantity] AS [Quantity],
+              [Invoices].[Discount] AS [Discount],
+              [Invoices].[ExtendedPrice] AS [ExtendedPrice],
+              [Invoices].[Freight] AS [Freight]
+              FROM [dbo].[Invoices] AS [Invoices]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Order Details Extended" EntityType="Self.Order Details Extended" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Order Details Extended].[OrderID] AS [OrderID], 
-    [Order Details Extended].[ProductID] AS [ProductID], 
-    [Order Details Extended].[ProductName] AS [ProductName], 
-    [Order Details Extended].[UnitPrice] AS [UnitPrice], 
-    [Order Details Extended].[Quantity] AS [Quantity], 
-    [Order Details Extended].[Discount] AS [Discount], 
-    [Order Details Extended].[ExtendedPrice] AS [ExtendedPrice]
-    FROM [dbo].[Order Details Extended] AS [Order Details Extended]</DefiningQuery>
+          <EntitySet Name="Order Details Extended" EntityType="Self.Order Details Extended" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Order Details Extended].[OrderID] AS [OrderID],
+              [Order Details Extended].[ProductID] AS [ProductID],
+              [Order Details Extended].[ProductName] AS [ProductName],
+              [Order Details Extended].[UnitPrice] AS [UnitPrice],
+              [Order Details Extended].[Quantity] AS [Quantity],
+              [Order Details Extended].[Discount] AS [Discount],
+              [Order Details Extended].[ExtendedPrice] AS [ExtendedPrice]
+              FROM [dbo].[Order Details Extended] AS [Order Details Extended]
+            </DefiningQuery>
           </EntitySet>
           <EntitySet Name="Order Subtotals" EntityType="Self.Order Subtotals" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Order Subtotals].[OrderID] AS [OrderID], 
-    [Order Subtotals].[Subtotal] AS [Subtotal]
-    FROM [dbo].[Order Subtotals] AS [Order Subtotals]</DefiningQuery>
+            <DefiningQuery>
+              SELECT
+              [Order Subtotals].[OrderID] AS [OrderID],
+              [Order Subtotals].[Subtotal] AS [Subtotal]
+              FROM [dbo].[Order Subtotals] AS [Order Subtotals]
+            </DefiningQuery>
           </EntitySet>
           <EntitySet Name="Orders Qry" EntityType="Self.Orders Qry" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Orders Qry].[OrderID] AS [OrderID], 
-    [Orders Qry].[CustomerID] AS [CustomerID], 
-    [Orders Qry].[EmployeeID] AS [EmployeeID], 
-    [Orders Qry].[OrderDate] AS [OrderDate], 
-    [Orders Qry].[RequiredDate] AS [RequiredDate], 
-    [Orders Qry].[ShippedDate] AS [ShippedDate], 
-    [Orders Qry].[ShipVia] AS [ShipVia], 
-    [Orders Qry].[Freight] AS [Freight], 
-    [Orders Qry].[ShipName] AS [ShipName], 
-    [Orders Qry].[ShipAddress] AS [ShipAddress], 
-    [Orders Qry].[ShipCity] AS [ShipCity], 
-    [Orders Qry].[ShipRegion] AS [ShipRegion], 
-    [Orders Qry].[ShipPostalCode] AS [ShipPostalCode], 
-    [Orders Qry].[ShipCountry] AS [ShipCountry], 
-    [Orders Qry].[CompanyName] AS [CompanyName], 
-    [Orders Qry].[Address] AS [Address], 
-    [Orders Qry].[City] AS [City], 
-    [Orders Qry].[Region] AS [Region], 
-    [Orders Qry].[PostalCode] AS [PostalCode], 
-    [Orders Qry].[Country] AS [Country]
-    FROM [dbo].[Orders Qry] AS [Orders Qry]</DefiningQuery>
+            <DefiningQuery>
+              SELECT
+              [Orders Qry].[OrderID] AS [OrderID],
+              [Orders Qry].[CustomerID] AS [CustomerID],
+              [Orders Qry].[EmployeeID] AS [EmployeeID],
+              [Orders Qry].[OrderDate] AS [OrderDate],
+              [Orders Qry].[RequiredDate] AS [RequiredDate],
+              [Orders Qry].[ShippedDate] AS [ShippedDate],
+              [Orders Qry].[ShipVia] AS [ShipVia],
+              [Orders Qry].[Freight] AS [Freight],
+              [Orders Qry].[ShipName] AS [ShipName],
+              [Orders Qry].[ShipAddress] AS [ShipAddress],
+              [Orders Qry].[ShipCity] AS [ShipCity],
+              [Orders Qry].[ShipRegion] AS [ShipRegion],
+              [Orders Qry].[ShipPostalCode] AS [ShipPostalCode],
+              [Orders Qry].[ShipCountry] AS [ShipCountry],
+              [Orders Qry].[CompanyName] AS [CompanyName],
+              [Orders Qry].[Address] AS [Address],
+              [Orders Qry].[City] AS [City],
+              [Orders Qry].[Region] AS [Region],
+              [Orders Qry].[PostalCode] AS [PostalCode],
+              [Orders Qry].[Country] AS [Country]
+              FROM [dbo].[Orders Qry] AS [Orders Qry]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Product Sales for 1997" EntityType="Self.Product Sales for 1997" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Product Sales for 1997].[CategoryName] AS [CategoryName], 
-    [Product Sales for 1997].[ProductName] AS [ProductName], 
-    [Product Sales for 1997].[ProductSales] AS [ProductSales]
-    FROM [dbo].[Product Sales for 1997] AS [Product Sales for 1997]</DefiningQuery>
+          <EntitySet Name="Product Sales for 1997" EntityType="Self.Product Sales for 1997" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Product Sales for 1997].[CategoryName] AS [CategoryName],
+              [Product Sales for 1997].[ProductName] AS [ProductName],
+              [Product Sales for 1997].[ProductSales] AS [ProductSales]
+              FROM [dbo].[Product Sales for 1997] AS [Product Sales for 1997]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Products Above Average Price" EntityType="Self.Products Above Average Price" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Products Above Average Price].[ProductName] AS [ProductName], 
-    [Products Above Average Price].[UnitPrice] AS [UnitPrice]
-    FROM [dbo].[Products Above Average Price] AS [Products Above Average Price]</DefiningQuery>
+          <EntitySet Name="Products Above Average Price" EntityType="Self.Products Above Average Price"
+                     store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Products Above Average Price].[ProductName] AS [ProductName],
+              [Products Above Average Price].[UnitPrice] AS [UnitPrice]
+              FROM [dbo].[Products Above Average Price] AS [Products Above Average Price]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Products by Category" EntityType="Self.Products by Category" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Products by Category].[CategoryName] AS [CategoryName], 
-    [Products by Category].[ProductName] AS [ProductName], 
-    [Products by Category].[QuantityPerUnit] AS [QuantityPerUnit], 
-    [Products by Category].[UnitsInStock] AS [UnitsInStock], 
-    [Products by Category].[Discontinued] AS [Discontinued]
-    FROM [dbo].[Products by Category] AS [Products by Category]</DefiningQuery>
+          <EntitySet Name="Products by Category" EntityType="Self.Products by Category" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Products by Category].[CategoryName] AS [CategoryName],
+              [Products by Category].[ProductName] AS [ProductName],
+              [Products by Category].[QuantityPerUnit] AS [QuantityPerUnit],
+              [Products by Category].[UnitsInStock] AS [UnitsInStock],
+              [Products by Category].[Discontinued] AS [Discontinued]
+              FROM [dbo].[Products by Category] AS [Products by Category]
+            </DefiningQuery>
           </EntitySet>
           <EntitySet Name="Sales by Category" EntityType="Self.Sales by Category" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sales by Category].[CategoryID] AS [CategoryID], 
-    [Sales by Category].[CategoryName] AS [CategoryName], 
-    [Sales by Category].[ProductName] AS [ProductName], 
-    [Sales by Category].[ProductSales] AS [ProductSales]
-    FROM [dbo].[Sales by Category] AS [Sales by Category]</DefiningQuery>
+            <DefiningQuery>
+              SELECT
+              [Sales by Category].[CategoryID] AS [CategoryID],
+              [Sales by Category].[CategoryName] AS [CategoryName],
+              [Sales by Category].[ProductName] AS [ProductName],
+              [Sales by Category].[ProductSales] AS [ProductSales]
+              FROM [dbo].[Sales by Category] AS [Sales by Category]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Sales Totals by Amount" EntityType="Self.Sales Totals by Amount" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sales Totals by Amount].[SaleAmount] AS [SaleAmount], 
-    [Sales Totals by Amount].[OrderID] AS [OrderID], 
-    [Sales Totals by Amount].[CompanyName] AS [CompanyName], 
-    [Sales Totals by Amount].[ShippedDate] AS [ShippedDate]
-    FROM [dbo].[Sales Totals by Amount] AS [Sales Totals by Amount]</DefiningQuery>
+          <EntitySet Name="Sales Totals by Amount" EntityType="Self.Sales Totals by Amount" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Sales Totals by Amount].[SaleAmount] AS [SaleAmount],
+              [Sales Totals by Amount].[OrderID] AS [OrderID],
+              [Sales Totals by Amount].[CompanyName] AS [CompanyName],
+              [Sales Totals by Amount].[ShippedDate] AS [ShippedDate]
+              FROM [dbo].[Sales Totals by Amount] AS [Sales Totals by Amount]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Summary of Sales by Quarter" EntityType="Self.Summary of Sales by Quarter" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Summary of Sales by Quarter].[ShippedDate] AS [ShippedDate], 
-    [Summary of Sales by Quarter].[OrderID] AS [OrderID], 
-    [Summary of Sales by Quarter].[Subtotal] AS [Subtotal]
-    FROM [dbo].[Summary of Sales by Quarter] AS [Summary of Sales by Quarter]</DefiningQuery>
+          <EntitySet Name="Summary of Sales by Quarter" EntityType="Self.Summary of Sales by Quarter"
+                     store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Summary of Sales by Quarter].[ShippedDate] AS [ShippedDate],
+              [Summary of Sales by Quarter].[OrderID] AS [OrderID],
+              [Summary of Sales by Quarter].[Subtotal] AS [Subtotal]
+              FROM [dbo].[Summary of Sales by Quarter] AS [Summary of Sales by Quarter]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Summary of Sales by Year" EntityType="Self.Summary of Sales by Year" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Summary of Sales by Year].[ShippedDate] AS [ShippedDate], 
-    [Summary of Sales by Year].[OrderID] AS [OrderID], 
-    [Summary of Sales by Year].[Subtotal] AS [Subtotal]
-    FROM [dbo].[Summary of Sales by Year] AS [Summary of Sales by Year]</DefiningQuery>
+          <EntitySet Name="Summary of Sales by Year" EntityType="Self.Summary of Sales by Year" store:Type="Views"
+                     store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [Summary of Sales by Year].[ShippedDate] AS [ShippedDate],
+              [Summary of Sales by Year].[OrderID] AS [OrderID],
+              [Summary of Sales by Year].[Subtotal] AS [Subtotal]
+              FROM [dbo].[Summary of Sales by Year] AS [Summary of Sales by Year]
+            </DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_CustomerCustomerDemo" Association="Self.FK_CustomerCustomerDemo">
             <End Role="CustomerDemographics" EntitySet="CustomerDemographics" />
@@ -763,7 +818,8 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmployeeTerritories_Territories" Association="Self.FK_EmployeeTerritories_Territories">
+          <AssociationSet Name="FK_EmployeeTerritories_Territories"
+                          Association="Self.FK_EmployeeTerritories_Territories">
             <End Role="Territories" EntitySet="Territories" />
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
           </AssociationSet>
@@ -804,24 +860,30 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Northwind.EF6Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Northwind.EF6Models" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories"
+                              ToRole="Products" />
         </EntityType>
         <EntityType Name="CustomerDemographic">
           <Key>
             <PropertyRef Name="CustomerTypeID" />
           </Key>
-          <Property Name="CustomerTypeID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="String" MaxLength="10" FixedLength="true" Unicode="true"
+                    Nullable="false" />
           <Property Name="CustomerDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="Self.CustomerCustomerDemo" FromRole="CustomerDemographics" ToRole="Customers" />
+          <NavigationProperty Name="Customers" Relationship="Self.CustomerCustomerDemo" FromRole="CustomerDemographics"
+                              ToRole="Customers" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -838,8 +900,10 @@
           <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customers" ToRole="Orders" />
-          <NavigationProperty Name="CustomerDemographics" Relationship="Self.CustomerCustomerDemo" FromRole="Customers" ToRole="CustomerDemographics" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customers"
+                              ToRole="Orders" />
+          <NavigationProperty Name="CustomerDemographics" Relationship="Self.CustomerCustomerDemo" FromRole="Customers"
+                              ToRole="CustomerDemographics" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -863,10 +927,14 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ReportsTo" Type="Int32" />
           <Property Name="PhotoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Employees1" />
-          <NavigationProperty Name="Employee1" Relationship="Self.FK_Employees_Employees" FromRole="Employees1" ToRole="Employees" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees" FromRole="Employees" ToRole="Orders" />
-          <NavigationProperty Name="Territories" Relationship="Self.EmployeeTerritories" FromRole="Employees" ToRole="Territories" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees"
+                              ToRole="Employees1" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Employees_Employees" FromRole="Employees1"
+                              ToRole="Employees" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees" FromRole="Employees"
+                              ToRole="Orders" />
+          <NavigationProperty Name="Territories" Relationship="Self.EmployeeTerritories" FromRole="Employees"
+                              ToRole="Territories" />
         </EntityType>
         <EntityType Name="Order_Detail">
           <Key>
@@ -878,8 +946,10 @@
           <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
           <Property Name="Discount" Type="Single" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Details_Orders" FromRole="Order_Details" ToRole="Orders" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Details_Products" FromRole="Order_Details" ToRole="Products" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Details_Orders" FromRole="Order_Details"
+                              ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Details_Products" FromRole="Order_Details"
+                              ToRole="Products" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -899,9 +969,12 @@
           <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders" ToRole="Customers" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Orders" ToRole="Employees" />
-          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Orders" FromRole="Orders" ToRole="Order_Details" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders"
+                              ToRole="Customers" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Orders"
+                              ToRole="Employees" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Orders" FromRole="Orders"
+                              ToRole="Order_Details" />
           <NavigationProperty Name="Shipper" Relationship="Self.FK_Orders_Shippers" FromRole="Orders" ToRole="Shippers" />
         </EntityType>
         <EntityType Name="Product">
@@ -918,17 +991,22 @@
           <Property Name="UnitsOnOrder" Type="Int16" />
           <Property Name="ReorderLevel" Type="Int16" />
           <Property Name="Discontinued" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Products" FromRole="Products" ToRole="Order_Details" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products"
+                              ToRole="Categories" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Products" FromRole="Products"
+                              ToRole="Order_Details" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products"
+                              ToRole="Suppliers" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionID" />
           </Key>
           <Property Name="RegionID" Type="Int32" Nullable="false" />
-          <Property Name="RegionDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Territories" Relationship="Self.FK_Territories_Region" FromRole="Region" ToRole="Territories" />
+          <Property Name="RegionDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true"
+                    Nullable="false" />
+          <NavigationProperty Name="Territories" Relationship="Self.FK_Territories_Region" FromRole="Region"
+                              ToRole="Territories" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -955,17 +1033,21 @@
           <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="HomePage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Suppliers"
+                              ToRole="Products" />
         </EntityType>
         <EntityType Name="Territory">
           <Key>
             <PropertyRef Name="TerritoryID" />
           </Key>
           <Property Name="TerritoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TerritoryDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TerritoryDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true"
+                    Nullable="false" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Territories_Region" FromRole="Territories" ToRole="Region" />
-          <NavigationProperty Name="Employees" Relationship="Self.EmployeeTerritories" FromRole="Territories" ToRole="Employees" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Territories_Region" FromRole="Territories"
+                              ToRole="Region" />
+          <NavigationProperty Name="Employees" Relationship="Self.EmployeeTerritories" FromRole="Territories"
+                              ToRole="Employees" />
         </EntityType>
         <EntityType Name="Alphabetical_list_of_product">
           <Key>
@@ -984,13 +1066,15 @@
           <Property Name="UnitsOnOrder" Type="Int16" />
           <Property Name="ReorderLevel" Type="Int16" />
           <Property Name="Discontinued" Type="Boolean" Nullable="false" />
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
         </EntityType>
         <EntityType Name="Category_Sales_for_1997">
           <Key>
             <PropertyRef Name="CategoryName" />
           </Key>
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="CategorySales" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Current_Product_List">
@@ -1009,7 +1093,8 @@
           <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Relationship" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relationship" Type="String" MaxLength="9" FixedLength="false" Unicode="false"
+                    Nullable="false" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -1030,7 +1115,8 @@
           <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="CustomerName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="40" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
@@ -1105,7 +1191,8 @@
             <PropertyRef Name="CategoryName" />
             <PropertyRef Name="ProductName" />
           </Key>
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductSales" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
@@ -1122,7 +1209,8 @@
             <PropertyRef Name="ProductName" />
             <PropertyRef Name="Discontinued" />
           </Key>
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="UnitsInStock" Type="Int16" />
@@ -1135,7 +1223,8 @@
             <PropertyRef Name="ProductName" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductSales" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
@@ -1361,7 +1450,8 @@
           <FunctionImport Name="CustOrdersOrders" ReturnType="Collection(Northwind.EF6Models.CustOrdersOrders_Result)">
             <Parameter Name="CustomerID" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Employee_Sales_by_Country" ReturnType="Collection(Northwind.EF6Models.Employee_Sales_by_Country_Result)">
+          <FunctionImport Name="Employee_Sales_by_Country"
+                          ReturnType="Collection(Northwind.EF6Models.Employee_Sales_by_Country_Result)">
             <Parameter Name="Beginning_Date" Mode="In" Type="DateTime" />
             <Parameter Name="Ending_Date" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -1373,7 +1463,8 @@
             <Parameter Name="CategoryName" Mode="In" Type="String" />
             <Parameter Name="OrdYear" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Ten_Most_Expensive_Products" ReturnType="Collection(Northwind.EF6Models.Ten_Most_Expensive_Products_Result)" />
+          <FunctionImport Name="Ten_Most_Expensive_Products"
+                          ReturnType="Collection(Northwind.EF6Models.Ten_Most_Expensive_Products_Result)" />
         </EntityContainer>
         <ComplexType Name="CustOrderHist_Result">
           <Property Type="String" Name="ProductName" Nullable="false" MaxLength="40" />
@@ -1419,7 +1510,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NorthwindEF6ModelsStoreContainer" CdmEntityContainer="NorthwindContext">
+        <EntityContainerMapping StorageEntityContainer="NorthwindEF6ModelsStoreContainer"
+                                CdmEntityContainer="NorthwindContext">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="Northwind.EF6Models.Category">
               <MappingFragment StoreEntitySet="Categories">
@@ -1758,7 +1850,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CustomerCustomerDemo" TypeName="Northwind.EF6Models.CustomerCustomerDemo" StoreEntitySet="CustomerCustomerDemo">
+          <AssociationSetMapping Name="CustomerCustomerDemo" TypeName="Northwind.EF6Models.CustomerCustomerDemo"
+                                 StoreEntitySet="CustomerCustomerDemo">
             <EndProperty Name="CustomerDemographics">
               <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
             </EndProperty>
@@ -1766,7 +1859,8 @@
               <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="EmployeeTerritories" TypeName="Northwind.EF6Models.EmployeeTerritories" StoreEntitySet="EmployeeTerritories">
+          <AssociationSetMapping Name="EmployeeTerritories" TypeName="Northwind.EF6Models.EmployeeTerritories"
+                                 StoreEntitySet="EmployeeTerritories">
             <EndProperty Name="Employees">
               <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
             </EndProperty>
@@ -1774,7 +1868,8 @@
               <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="CustOrderHist" FunctionName="Northwind.EF6Models.Store.CustOrderHist">
+          <FunctionImportMapping FunctionImportName="CustOrderHist"
+                                 FunctionName="Northwind.EF6Models.Store.CustOrderHist">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.CustOrderHist_Result">
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1782,7 +1877,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CustOrdersDetail" FunctionName="Northwind.EF6Models.Store.CustOrdersDetail">
+          <FunctionImportMapping FunctionImportName="CustOrdersDetail"
+                                 FunctionName="Northwind.EF6Models.Store.CustOrdersDetail">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.CustOrdersDetail_Result">
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1793,7 +1889,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CustOrdersOrders" FunctionName="Northwind.EF6Models.Store.CustOrdersOrders">
+          <FunctionImportMapping FunctionImportName="CustOrdersOrders"
+                                 FunctionName="Northwind.EF6Models.Store.CustOrdersOrders">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.CustOrdersOrders_Result">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -1803,7 +1900,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Employee_Sales_by_Country" FunctionName="Northwind.EF6Models.Store.Employee_Sales_by_Country">
+          <FunctionImportMapping FunctionImportName="Employee_Sales_by_Country"
+                                 FunctionName="Northwind.EF6Models.Store.Employee_Sales_by_Country">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.Employee_Sales_by_Country_Result">
                 <ScalarProperty Name="Country" ColumnName="Country" />
@@ -1815,7 +1913,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sales_by_Year" FunctionName="Northwind.EF6Models.Store.Sales_by_Year">
+          <FunctionImportMapping FunctionImportName="Sales_by_Year"
+                                 FunctionName="Northwind.EF6Models.Store.Sales_by_Year">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.Sales_by_Year_Result">
                 <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
@@ -1825,7 +1924,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SalesByCategory" FunctionName="Northwind.EF6Models.Store.SalesByCategory">
+          <FunctionImportMapping FunctionImportName="SalesByCategory"
+                                 FunctionName="Northwind.EF6Models.Store.SalesByCategory">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.SalesByCategory_Result">
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1833,7 +1933,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Ten_Most_Expensive_Products" FunctionName="Northwind.EF6Models.Store.Ten_Most_Expensive_Products">
+          <FunctionImportMapping FunctionImportName="Ten_Most_Expensive_Products"
+                                 FunctionName="Northwind.EF6Models.Store.Ten_Most_Expensive_Products">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Northwind.EF6Models.Ten_Most_Expensive_Products_Result">
                 <ScalarProperty Name="TenMostExpensiveProducts" ColumnName="TenMostExpensiveProducts" />
