@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace NorthwindDemo.Mvc5App.Areas.WMS
+namespace NorthwindDemo.Mvc5App.Areas.Warehouse
 {
-    public class WMSAreaRegistration : AreaRegistration 
+    public class WarehouseAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "WMS";
+                return "Warehouse";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "WMS_default",
-                "WMS/{controller}/{action}/{id}",
+                "Warehouse_default",
+                "Warehouse/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

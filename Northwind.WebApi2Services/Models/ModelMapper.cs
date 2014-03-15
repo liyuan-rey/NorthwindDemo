@@ -17,7 +17,7 @@ namespace Northwind.WebApi2Services.Models
         public static Expression<Func<Category, CategoryListItemDto>> Category2CategoryListDto =
             c => new CategoryListItemDto
             {
-                CategoryId = c.CategoryID,
+                CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 Picture = c.Picture
             };
@@ -29,7 +29,7 @@ namespace Northwind.WebApi2Services.Models
         public static Expression<Func<Category, NewCategoryDto>> Category2NewCategoryDto =
             c => new NewCategoryDto
             {
-                CategoryId = c.CategoryID,
+                CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 Description = c.Description,
                 Picture = c.Picture
@@ -38,7 +38,7 @@ namespace Northwind.WebApi2Services.Models
         public static Expression<Func<NewCategoryDto, Category>> NewCategoryDto2Category =
             c => new Category
             {
-                CategoryID = c.CategoryId,
+                CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 Description = c.Description,
                 Picture = c.Picture
@@ -51,7 +51,7 @@ namespace Northwind.WebApi2Services.Models
         public static Expression<Func<Category, UpdateCategoryDto>> Category2UpdateCategoryDto =
             c => new UpdateCategoryDto
             {
-                CategoryId = c.CategoryID,
+                CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 Description = c.Description,
                 Picture = c.Picture
@@ -60,15 +60,13 @@ namespace Northwind.WebApi2Services.Models
         public static Expression<Func<UpdateCategoryDto, Category>> UpdateCategoryDto2Category =
             c => new Category
             {
-                CategoryID = c.CategoryId,
+                CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 Description = c.Description,
                 Picture = c.Picture
             };
 
-        public static TDestination Map<TSource, TDestination>(
-            TSource source, IEnumerable<string> properties
-            )
+        public static TDestination Map<TSource, TDestination>(TSource source, IEnumerable<string> properties)
         {
             if (properties == null)
                 throw new ArgumentNullException("properties");

@@ -1,6 +1,6 @@
 ﻿// CategoryController.cs
 
-namespace Northwind.WebApi2Services.Controllers
+namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace Northwind.WebApi2Services.Controllers
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using Northwind.EF6Models;
-    using Northwind.WebApi2Services.Dto;
-    using Northwind.WebApi2Services.Filters;
-    using Northwind.WebApi2Services.Models;
+    using Dto;
+    using EF6Models;
+    using Filters;
+    using Models;
 
     [UnhandledExceptionFilter]
     public class CategoryController : ApiController
@@ -21,7 +21,7 @@ namespace Northwind.WebApi2Services.Controllers
         // GET api/<controller>
         public async Task<IEnumerable<CategoryListItemDto>> Get()
         {
-            using (var ctx = new NorthwindContext())
+            using (var ctx = new NorthwindDbContext())
             {
                 ctx.Configuration.ProxyCreationEnabled = false;
 
@@ -37,7 +37,7 @@ namespace Northwind.WebApi2Services.Controllers
         // GET api/<controller>/5
         public async Task<CategoryListItemDto> Get(int id)
         {
-            using (var ctx = new NorthwindContext())
+            using (var ctx = new NorthwindDbContext())
             {
                 CategoryListItemDto result = await ctx.Categories.AsNoTracking()
                                                       .Select(ModelMapper.Category2CategoryListDto)
@@ -62,7 +62,7 @@ namespace Northwind.WebApi2Services.Controllers
                     Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState));
             }
 
-            using (var ctx = new NorthwindContext())
+            using (var ctx = new NorthwindDbContext())
             {
                 Func<NewCategoryDto, Category> func = ModelMapper.NewCategoryDto2Category.Compile();
                 Category categoty = func(value);
@@ -82,7 +82,7 @@ namespace Northwind.WebApi2Services.Controllers
                     Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState));
             }
 
-            using (var ctx = new NorthwindContext())
+            using (var ctx = new NorthwindDbContext())
             {
                 Func<UpdateCategoryDto, Category> func = ModelMapper.UpdateCategoryDto2Category.Compile();
                 Category categoty = func(value);
@@ -99,11 +99,11 @@ namespace Northwind.WebApi2Services.Controllers
         // DELETE api/<controller>/5
         public async Task Delete(int id)
         {
-            using (var ctx = new NorthwindContext())
+            using (var ctx = new NorthwindDbContext())
             {
                 var category = new Category
                 {
-                    CategoryID = id
+                    CategoryId = id
                 };
 
                 ctx.Categories.Attach(category);

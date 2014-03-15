@@ -1,6 +1,6 @@
 ﻿// ProductController.cs
 
-namespace Northwind.WebApi2Services.Controllers
+namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Http;
