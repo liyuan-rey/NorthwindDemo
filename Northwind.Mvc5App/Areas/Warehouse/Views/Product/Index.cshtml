@@ -4,3 +4,33 @@
 
 <h2>Product List</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id ="productlist"></div>
+    
+
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.zh-Hans.min.js")
+    @Scripts.Render("~/Scripts/kendo/2013.3.1119/kendo.web.min.js")
+    @Scripts.Render("~/Scripts/kendo/2013.3.1119/kendo.grid.min.js")
+
+    @Scripts.Render("~/Areas/Warehouse/Scripts/productlist.js")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("!");
+            initProductGrid();
+        });
+
+        function initProductGrid() {
+            $("#productlist").kendoGrid({
+                columns: ["name", "age"], // two columns bound to the "name" and "age" fields
+                dataSource: [{ name: "Jane", age: 31 }, { name: "John", age: 33 }]
+            });
+        }
+    </script>
+}

@@ -198,6 +198,7 @@
       <DependentUpon>northwnd.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\northwnd.mdf" />
+    <Content Include="Areas\Warehouse\Scripts\productlist.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1244,7 +1245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Warehouse\Models\" />
-    <Folder Include="Areas\Warehouse\Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
