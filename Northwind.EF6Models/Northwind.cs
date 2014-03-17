@@ -1,30 +1,16 @@
-﻿
+﻿// Northwind.cs
 
-// This file was automatically generated.
-// Do not make changes directly to this file - edit the template instead.
-// 
-// The following connection settings were used to generate this file
-// 
-//     Configuration file:     "Northwind.EF6Models\App.config"
-//     Connection String Name: "NorthwindConnection"
-//     Connection String:      "Data Source=(LocalDb)\v11.0;AttachDbFilename='E:\Visual Studio 2013\Projects\WebApplication2\WebApplication2\App_Data\northwnd.mdf';Initial Catalog=northwnd;Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True;App=NorthwindDemo"
-
-// ReSharper disable RedundantUsingDirective
-// ReSharper disable DoNotCallOverridableMethodsInConstructor
-// ReSharper disable InconsistentNaming
-// ReSharper disable PartialTypeWithSinglePart
-// ReSharper disable PartialMethodWithSinglePart
-// ReSharper disable RedundantNameQualifier
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
-//using DatabaseGeneratedOption = System.ComponentModel.DataAnnotations.DatabaseGeneratedOption;
+ //using DatabaseGeneratedOption = System.ComponentModel.DataAnnotations.DatabaseGeneratedOption;
 
 namespace Northwind.EF6Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.ModelConfiguration;
+
     // ************************************************************************
     // Unit of work
     public interface INorthwindDbContext : IDisposable
@@ -63,12 +49,35 @@ namespace Northwind.EF6Models
     // Database context
     public partial class NorthwindDbContext : DbContext, INorthwindDbContext
     {
-        public IDbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; } // Alphabetical list of products
+        static NorthwindDbContext()
+        {
+            Database.SetInitializer<NorthwindDbContext>(null);
+        }
+
+        public NorthwindDbContext()
+            : base("Name=NorthwindConnection")
+        {
+            InitializePartial();
+        }
+
+        public NorthwindDbContext(string connectionString) : base(connectionString)
+        {
+            InitializePartial();
+        }
+
+        public NorthwindDbContext(string connectionString, DbCompiledModel model) : base(connectionString, model)
+        {
+            InitializePartial();
+        }
+
+        public IDbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }
+        // Alphabetical list of products
         public IDbSet<Category> Categories { get; set; } // Categories
         public IDbSet<CategorySalesFor1997> CategorySalesFor1997 { get; set; } // Category Sales for 1997
         public IDbSet<CurrentProductList> CurrentProductLists { get; set; } // Current Product List
         public IDbSet<Customer> Customers { get; set; } // Customers
-        public IDbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCities { get; set; } // Customer and Suppliers by City
+        public IDbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCities { get; set; }
+        // Customer and Suppliers by City
         public IDbSet<CustomerDemographic> CustomerDemographics { get; set; } // CustomerDemographics
         public IDbSet<Employee> Employees { get; set; } // Employees
         public IDbSet<Invoice> Invoices { get; set; } // Invoices
@@ -78,7 +87,8 @@ namespace Northwind.EF6Models
         public IDbSet<OrdersQry> OrdersQries { get; set; } // Orders Qry
         public IDbSet<OrderSubtotal> OrderSubtotals { get; set; } // Order Subtotals
         public IDbSet<Product> Products { get; set; } // Products
-        public IDbSet<ProductsAboveAveragePrice> ProductsAboveAveragePrices { get; set; } // Products Above Average Price
+        public IDbSet<ProductsAboveAveragePrice> ProductsAboveAveragePrices { get; set; }
+        // Products Above Average Price
         public IDbSet<ProductSalesFor1997> ProductSalesFor1997 { get; set; } // Product Sales for 1997
         public IDbSet<ProductsByCategory> ProductsByCategories { get; set; } // Products by Category
         public IDbSet<Region> Regions { get; set; } // Region
@@ -89,27 +99,6 @@ namespace Northwind.EF6Models
         public IDbSet<SummaryOfSalesByYear> SummaryOfSalesByYears { get; set; } // Summary of Sales by Year
         public IDbSet<Supplier> Suppliers { get; set; } // Suppliers
         public IDbSet<Territory> Territories { get; set; } // Territories
-
-        static NorthwindDbContext()
-        {
-            Database.SetInitializer<NorthwindDbContext>(null);
-        }
-
-        public NorthwindDbContext()
-            : base("Name=NorthwindConnection")
-        {
-        InitializePartial();
-        }
-
-        public NorthwindDbContext(string connectionString) : base(connectionString)
-        {
-        InitializePartial();
-        }
-
-        public NorthwindDbContext(string connectionString, System.Data.Entity.Infrastructure.DbCompiledModel model) : base(connectionString, model)
-        {
-        InitializePartial();
-        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -141,7 +130,7 @@ namespace Northwind.EF6Models
             modelBuilder.Configurations.Add(new SummaryOfSalesByYearConfiguration());
             modelBuilder.Configurations.Add(new SupplierConfiguration());
             modelBuilder.Configurations.Add(new TerritoryConfiguration());
-        OnModelCreatingPartial(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
         }
 
         public static DbModelBuilder CreateModel(DbModelBuilder modelBuilder, string schema)
@@ -201,6 +190,12 @@ namespace Northwind.EF6Models
     // Categories
     public partial class Category
     {
+        public Category()
+        {
+            Products = new HashSet<Product>();
+            InitializePartial();
+        }
+
         public int CategoryId { get; set; } // CategoryID (Primary key)
         public string CategoryName { get; set; } // CategoryName
         public string Description { get; set; } // Description
@@ -209,11 +204,6 @@ namespace Northwind.EF6Models
         // Reverse navigation
         public virtual ICollection<Product> Products { get; set; } // Products.FK_Products_Categories
 
-        public Category()
-        {
-            Products = new HashSet<Product>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -234,6 +224,13 @@ namespace Northwind.EF6Models
     // Customers
     public partial class Customer
     {
+        public Customer()
+        {
+            Orders = new HashSet<Order>();
+            CustomerDemographics = new HashSet<CustomerDemographic>();
+            InitializePartial();
+        }
+
         public string CustomerId { get; set; } // CustomerID (Primary key)
         public string CompanyName { get; set; } // CompanyName
         public string ContactName { get; set; } // ContactName
@@ -250,12 +247,6 @@ namespace Northwind.EF6Models
         public virtual ICollection<CustomerDemographic> CustomerDemographics { get; set; } // Many to many mapping
         public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_Customers
 
-        public Customer()
-        {
-            Orders = new HashSet<Order>();
-            CustomerDemographics = new HashSet<CustomerDemographic>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -271,23 +262,32 @@ namespace Northwind.EF6Models
     // CustomerDemographics
     public partial class CustomerDemographic
     {
+        public CustomerDemographic()
+        {
+            Customers = new HashSet<Customer>();
+            InitializePartial();
+        }
+
         public string CustomerTypeId { get; set; } // CustomerTypeID (Primary key)
         public string CustomerDesc { get; set; } // CustomerDesc
 
         // Reverse navigation
         public virtual ICollection<Customer> Customers { get; set; } // Many to many mapping
 
-        public CustomerDemographic()
-        {
-            Customers = new HashSet<Customer>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
     // Employees
     public partial class Employee
     {
+        public Employee()
+        {
+            Employees = new HashSet<Employee>();
+            Orders = new HashSet<Order>();
+            Territories = new HashSet<Territory>();
+            InitializePartial();
+        }
+
         public int EmployeeId { get; set; } // EmployeeID (Primary key)
         public string LastName { get; set; } // LastName
         public string FirstName { get; set; } // FirstName
@@ -315,13 +315,6 @@ namespace Northwind.EF6Models
         // Foreign keys
         public virtual Employee Employee_ReportsTo { get; set; } // FK_Employees_Employees
 
-        public Employee()
-        {
-            Employees = new HashSet<Employee>();
-            Orders = new HashSet<Order>();
-            Territories = new HashSet<Territory>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -359,6 +352,13 @@ namespace Northwind.EF6Models
     // Orders
     public partial class Order
     {
+        public Order()
+        {
+            Freight = 0m;
+            OrderDetails = new HashSet<OrderDetail>();
+            InitializePartial();
+        }
+
         public int OrderId { get; set; } // OrderID (Primary key)
         public string CustomerId { get; set; } // CustomerID
         public int? EmployeeId { get; set; } // EmployeeID
@@ -382,18 +382,20 @@ namespace Northwind.EF6Models
         public virtual Employee Employee { get; set; } // FK_Orders_Employees
         public virtual Shipper Shipper { get; set; } // FK_Orders_Shippers
 
-        public Order()
-        {
-            Freight = 0m;
-            OrderDetails = new HashSet<OrderDetail>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
     // Order Details
     public partial class OrderDetail
     {
+        public OrderDetail()
+        {
+            UnitPrice = 0m;
+            Quantity = 1;
+            Discount = 0;
+            InitializePartial();
+        }
+
         public int OrderId { get; set; } // OrderID (Primary key)
         public int ProductId { get; set; } // ProductID (Primary key)
         public decimal UnitPrice { get; set; } // UnitPrice
@@ -404,13 +406,6 @@ namespace Northwind.EF6Models
         public virtual Order Order { get; set; } // FK_Order_Details_Orders
         public virtual Product Product { get; set; } // FK_Order_Details_Products
 
-        public OrderDetail()
-        {
-            UnitPrice = 0m;
-            Quantity = 1;
-            Discount = 0;
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -461,6 +456,17 @@ namespace Northwind.EF6Models
     // Products
     public partial class Product
     {
+        public Product()
+        {
+            UnitPrice = 0m;
+            UnitsInStock = 0;
+            UnitsOnOrder = 0;
+            ReorderLevel = 0;
+            Discontinued = false;
+            OrderDetails = new HashSet<OrderDetail>();
+            InitializePartial();
+        }
+
         public int ProductId { get; set; } // ProductID (Primary key)
         public string ProductName { get; set; } // ProductName
         public int? SupplierId { get; set; } // SupplierID
@@ -479,16 +485,6 @@ namespace Northwind.EF6Models
         public virtual Category Category { get; set; } // FK_Products_Categories
         public virtual Supplier Supplier { get; set; } // FK_Products_Suppliers
 
-        public Product()
-        {
-            UnitPrice = 0m;
-            UnitsInStock = 0;
-            UnitsOnOrder = 0;
-            ReorderLevel = 0;
-            Discontinued = false;
-            OrderDetails = new HashSet<OrderDetail>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -520,17 +516,18 @@ namespace Northwind.EF6Models
     // Region
     public partial class Region
     {
+        public Region()
+        {
+            Territories = new HashSet<Territory>();
+            InitializePartial();
+        }
+
         public int RegionId { get; set; } // RegionID (Primary key)
         public string RegionDescription { get; set; } // RegionDescription
 
         // Reverse navigation
         public virtual ICollection<Territory> Territories { get; set; } // Territories.FK_Territories_Region
 
-        public Region()
-        {
-            Territories = new HashSet<Territory>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -555,6 +552,12 @@ namespace Northwind.EF6Models
     // Shippers
     public partial class Shipper
     {
+        public Shipper()
+        {
+            Orders = new HashSet<Order>();
+            InitializePartial();
+        }
+
         public int ShipperId { get; set; } // ShipperID (Primary key)
         public string CompanyName { get; set; } // CompanyName
         public string Phone { get; set; } // Phone
@@ -562,11 +565,6 @@ namespace Northwind.EF6Models
         // Reverse navigation
         public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_Shippers
 
-        public Shipper()
-        {
-            Orders = new HashSet<Order>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -589,6 +587,12 @@ namespace Northwind.EF6Models
     // Suppliers
     public partial class Supplier
     {
+        public Supplier()
+        {
+            Products = new HashSet<Product>();
+            InitializePartial();
+        }
+
         public int SupplierId { get; set; } // SupplierID (Primary key)
         public string CompanyName { get; set; } // CompanyName
         public string ContactName { get; set; } // ContactName
@@ -605,17 +609,18 @@ namespace Northwind.EF6Models
         // Reverse navigation
         public virtual ICollection<Product> Products { get; set; } // Products.FK_Products_Suppliers
 
-        public Supplier()
-        {
-            Products = new HashSet<Product>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
     // Territories
     public partial class Territory
     {
+        public Territory()
+        {
+            Employees = new HashSet<Employee>();
+            InitializePartial();
+        }
+
         public string TerritoryId { get; set; } // TerritoryID (Primary key)
         public string TerritoryDescription { get; set; } // TerritoryDescription
         public int RegionId { get; set; } // RegionID
@@ -626,11 +631,6 @@ namespace Northwind.EF6Models
         // Foreign keys
         public virtual Region Region { get; set; } // FK_Territories_Region
 
-        public Territory()
-        {
-            Employees = new HashSet<Employee>();
-            InitializePartial();
-        }
         partial void InitializePartial();
     }
 
@@ -644,14 +644,14 @@ namespace Northwind.EF6Models
         public AlphabeticalListOfProductConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Alphabetical list of products");
-            HasKey(x => new { x.ProductId, x.ProductName, x.Discontinued, x.CategoryName });
+            HasKey(x => new {x.ProductId, x.ProductName, x.Discontinued, x.CategoryName});
 
             Property(x => x.ProductId).HasColumnName("ProductID").IsRequired();
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
             Property(x => x.SupplierId).HasColumnName("SupplierID").IsOptional();
             Property(x => x.CategoryId).HasColumnName("CategoryID").IsOptional();
             Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsOptional().HasMaxLength(20);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19,4);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19, 4);
             Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsOptional();
             Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsOptional();
             Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsOptional();
@@ -659,6 +659,7 @@ namespace Northwind.EF6Models
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -670,12 +671,16 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Categories");
             HasKey(x => x.CategoryId);
 
-            Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.CategoryId)
+                .HasColumnName("CategoryID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
             Property(x => x.Description).HasColumnName("Description").IsOptional().HasMaxLength(1073741823);
             Property(x => x.Picture).HasColumnName("Picture").IsOptional().HasMaxLength(2147483647);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -688,9 +693,10 @@ namespace Northwind.EF6Models
             HasKey(x => x.CategoryName);
 
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
-            Property(x => x.CategorySales).HasColumnName("CategorySales").IsOptional().HasPrecision(19,4);
+            Property(x => x.CategorySales).HasColumnName("CategorySales").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -700,12 +706,16 @@ namespace Northwind.EF6Models
         public CurrentProductListConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Current Product List");
-            HasKey(x => new { x.ProductId, x.ProductName });
+            HasKey(x => new {x.ProductId, x.ProductName});
 
-            Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.ProductId)
+                .HasColumnName("ProductID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -717,7 +727,11 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Customers");
             HasKey(x => x.CustomerId);
 
-            Property(x => x.CustomerId).HasColumnName("CustomerID").IsRequired().HasMaxLength(5).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.CustomerId)
+                .HasColumnName("CustomerID")
+                .IsRequired()
+                .HasMaxLength(5)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasMaxLength(40);
             Property(x => x.ContactName).HasColumnName("ContactName").IsOptional().HasMaxLength(30);
             Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsOptional().HasMaxLength(30);
@@ -728,7 +742,7 @@ namespace Northwind.EF6Models
             Property(x => x.Country).HasColumnName("Country").IsOptional().HasMaxLength(15);
             Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasMaxLength(24);
             Property(x => x.Fax).HasColumnName("Fax").IsOptional().HasMaxLength(24);
-            HasMany(t => t.CustomerDemographics).WithMany(t => t.Customers).Map(m => 
+            HasMany(t => t.CustomerDemographics).WithMany(t => t.Customers).Map(m =>
             {
                 m.ToTable("CustomerCustomerDemo");
                 m.MapLeftKey("CustomerID");
@@ -736,6 +750,7 @@ namespace Northwind.EF6Models
             });
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -745,7 +760,7 @@ namespace Northwind.EF6Models
         public CustomerAndSuppliersByCityConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Customer and Suppliers by City");
-            HasKey(x => new { x.CompanyName, x.Relationship });
+            HasKey(x => new {x.CompanyName, x.Relationship});
 
             Property(x => x.City).HasColumnName("City").IsOptional().HasMaxLength(15);
             Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasMaxLength(40);
@@ -753,6 +768,7 @@ namespace Northwind.EF6Models
             Property(x => x.Relationship).HasColumnName("Relationship").IsRequired().HasMaxLength(9);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -764,10 +780,15 @@ namespace Northwind.EF6Models
             ToTable(schema + ".CustomerDemographics");
             HasKey(x => x.CustomerTypeId);
 
-            Property(x => x.CustomerTypeId).HasColumnName("CustomerTypeID").IsRequired().HasMaxLength(10).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.CustomerTypeId)
+                .HasColumnName("CustomerTypeID")
+                .IsRequired()
+                .HasMaxLength(10)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.CustomerDesc).HasColumnName("CustomerDesc").IsOptional().HasMaxLength(1073741823);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -779,7 +800,10 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Employees");
             HasKey(x => x.EmployeeId);
 
-            Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.EmployeeId)
+                .HasColumnName("EmployeeID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.LastName).HasColumnName("LastName").IsRequired().HasMaxLength(20);
             Property(x => x.FirstName).HasColumnName("FirstName").IsRequired().HasMaxLength(10);
             Property(x => x.Title).HasColumnName("Title").IsOptional().HasMaxLength(30);
@@ -799,8 +823,9 @@ namespace Northwind.EF6Models
             Property(x => x.PhotoPath).HasColumnName("PhotoPath").IsOptional().HasMaxLength(255);
 
             // Foreign keys
-            HasOptional(a => a.Employee_ReportsTo).WithMany(b => b.Employees).HasForeignKey(c => c.ReportsTo); // FK_Employees_Employees
-            HasMany(t => t.Territories).WithMany(t => t.Employees).Map(m => 
+            HasOptional(a => a.Employee_ReportsTo).WithMany(b => b.Employees).HasForeignKey(c => c.ReportsTo);
+                // FK_Employees_Employees
+            HasMany(t => t.Territories).WithMany(t => t.Employees).Map(m =>
             {
                 m.ToTable("EmployeeTerritories");
                 m.MapLeftKey("EmployeeID");
@@ -808,6 +833,7 @@ namespace Northwind.EF6Models
             });
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -817,7 +843,20 @@ namespace Northwind.EF6Models
         public InvoiceConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Invoices");
-            HasKey(x => new { x.CustomerName, x.Salesperson, x.OrderId, x.ShipperName, x.ProductId, x.ProductName, x.UnitPrice, x.Quantity, x.Discount });
+            HasKey(
+                x =>
+                    new
+                    {
+                        x.CustomerName,
+                        x.Salesperson,
+                        x.OrderId,
+                        x.ShipperName,
+                        x.ProductId,
+                        x.ProductName,
+                        x.UnitPrice,
+                        x.Quantity,
+                        x.Discount
+                    });
 
             Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasMaxLength(40);
             Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasMaxLength(60);
@@ -840,13 +879,14 @@ namespace Northwind.EF6Models
             Property(x => x.ShipperName).HasColumnName("ShipperName").IsRequired().HasMaxLength(40);
             Property(x => x.ProductId).HasColumnName("ProductID").IsRequired();
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19,4);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19, 4);
             Property(x => x.Quantity).HasColumnName("Quantity").IsRequired();
             Property(x => x.Discount).HasColumnName("Discount").IsRequired();
-            Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasPrecision(19,4);
-            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19,4);
+            Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasPrecision(19, 4);
+            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -858,14 +898,17 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Orders");
             HasKey(x => x.OrderId);
 
-            Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.OrderId)
+                .HasColumnName("OrderID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.CustomerId).HasColumnName("CustomerID").IsOptional().HasMaxLength(5);
             Property(x => x.EmployeeId).HasColumnName("EmployeeID").IsOptional();
             Property(x => x.OrderDate).HasColumnName("OrderDate").IsOptional();
             Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsOptional();
             Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional();
             Property(x => x.ShipVia).HasColumnName("ShipVia").IsOptional();
-            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19,4);
+            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19, 4);
             Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasMaxLength(40);
             Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasMaxLength(60);
             Property(x => x.ShipCity).HasColumnName("ShipCity").IsOptional().HasMaxLength(15);
@@ -874,11 +917,14 @@ namespace Northwind.EF6Models
             Property(x => x.ShipCountry).HasColumnName("ShipCountry").IsOptional().HasMaxLength(15);
 
             // Foreign keys
-            HasOptional(a => a.Customer).WithMany(b => b.Orders).HasForeignKey(c => c.CustomerId); // FK_Orders_Customers
-            HasOptional(a => a.Employee).WithMany(b => b.Orders).HasForeignKey(c => c.EmployeeId); // FK_Orders_Employees
+            HasOptional(a => a.Customer).WithMany(b => b.Orders).HasForeignKey(c => c.CustomerId);
+                // FK_Orders_Customers
+            HasOptional(a => a.Employee).WithMany(b => b.Orders).HasForeignKey(c => c.EmployeeId);
+                // FK_Orders_Employees
             HasOptional(a => a.Shipper).WithMany(b => b.Orders).HasForeignKey(c => c.ShipVia); // FK_Orders_Shippers
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -888,19 +934,28 @@ namespace Northwind.EF6Models
         public OrderDetailConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Order Details");
-            HasKey(x => new { x.OrderId, x.ProductId });
+            HasKey(x => new {x.OrderId, x.ProductId});
 
-            Property(x => x.OrderId).HasColumnName("OrderID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19,4);
+            Property(x => x.OrderId)
+                .HasColumnName("OrderID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.ProductId)
+                .HasColumnName("ProductID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19, 4);
             Property(x => x.Quantity).HasColumnName("Quantity").IsRequired();
             Property(x => x.Discount).HasColumnName("Discount").IsRequired();
 
             // Foreign keys
-            HasRequired(a => a.Order).WithMany(b => b.OrderDetails).HasForeignKey(c => c.OrderId); // FK_Order_Details_Orders
-            HasRequired(a => a.Product).WithMany(b => b.OrderDetails).HasForeignKey(c => c.ProductId); // FK_Order_Details_Products
+            HasRequired(a => a.Order).WithMany(b => b.OrderDetails).HasForeignKey(c => c.OrderId);
+                // FK_Order_Details_Orders
+            HasRequired(a => a.Product).WithMany(b => b.OrderDetails).HasForeignKey(c => c.ProductId);
+                // FK_Order_Details_Products
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -910,17 +965,18 @@ namespace Northwind.EF6Models
         public OrderDetailsExtendedConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Order Details Extended");
-            HasKey(x => new { x.OrderId, x.ProductId, x.ProductName, x.UnitPrice, x.Quantity, x.Discount });
+            HasKey(x => new {x.OrderId, x.ProductId, x.ProductName, x.UnitPrice, x.Quantity, x.Discount});
 
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
             Property(x => x.ProductId).HasColumnName("ProductID").IsRequired();
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19,4);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsRequired().HasPrecision(19, 4);
             Property(x => x.Quantity).HasColumnName("Quantity").IsRequired();
             Property(x => x.Discount).HasColumnName("Discount").IsRequired();
-            Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasPrecision(19,4);
+            Property(x => x.ExtendedPrice).HasColumnName("ExtendedPrice").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -930,7 +986,7 @@ namespace Northwind.EF6Models
         public OrdersQryConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Orders Qry");
-            HasKey(x => new { x.OrderId, x.CompanyName });
+            HasKey(x => new {x.OrderId, x.CompanyName});
 
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
             Property(x => x.CustomerId).HasColumnName("CustomerID").IsOptional().HasMaxLength(5);
@@ -939,7 +995,7 @@ namespace Northwind.EF6Models
             Property(x => x.RequiredDate).HasColumnName("RequiredDate").IsOptional();
             Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional();
             Property(x => x.ShipVia).HasColumnName("ShipVia").IsOptional();
-            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19,4);
+            Property(x => x.Freight).HasColumnName("Freight").IsOptional().HasPrecision(19, 4);
             Property(x => x.ShipName).HasColumnName("ShipName").IsOptional().HasMaxLength(40);
             Property(x => x.ShipAddress).HasColumnName("ShipAddress").IsOptional().HasMaxLength(60);
             Property(x => x.ShipCity).HasColumnName("ShipCity").IsOptional().HasMaxLength(15);
@@ -954,6 +1010,7 @@ namespace Northwind.EF6Models
             Property(x => x.Country).HasColumnName("Country").IsOptional().HasMaxLength(15);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -966,9 +1023,10 @@ namespace Northwind.EF6Models
             HasKey(x => x.OrderId);
 
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
-            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19,4);
+            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -980,22 +1038,28 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Products");
             HasKey(x => x.ProductId);
 
-            Property(x => x.ProductId).HasColumnName("ProductID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.ProductId)
+                .HasColumnName("ProductID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
             Property(x => x.SupplierId).HasColumnName("SupplierID").IsOptional();
             Property(x => x.CategoryId).HasColumnName("CategoryID").IsOptional();
             Property(x => x.QuantityPerUnit).HasColumnName("QuantityPerUnit").IsOptional().HasMaxLength(20);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19,4);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19, 4);
             Property(x => x.UnitsInStock).HasColumnName("UnitsInStock").IsOptional();
             Property(x => x.UnitsOnOrder).HasColumnName("UnitsOnOrder").IsOptional();
             Property(x => x.ReorderLevel).HasColumnName("ReorderLevel").IsOptional();
             Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired();
 
             // Foreign keys
-            HasOptional(a => a.Supplier).WithMany(b => b.Products).HasForeignKey(c => c.SupplierId); // FK_Products_Suppliers
-            HasOptional(a => a.Category).WithMany(b => b.Products).HasForeignKey(c => c.CategoryId); // FK_Products_Categories
+            HasOptional(a => a.Supplier).WithMany(b => b.Products).HasForeignKey(c => c.SupplierId);
+                // FK_Products_Suppliers
+            HasOptional(a => a.Category).WithMany(b => b.Products).HasForeignKey(c => c.CategoryId);
+                // FK_Products_Categories
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1008,9 +1072,10 @@ namespace Northwind.EF6Models
             HasKey(x => x.ProductName);
 
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
-            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19,4);
+            Property(x => x.UnitPrice).HasColumnName("UnitPrice").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1020,13 +1085,14 @@ namespace Northwind.EF6Models
         public ProductSalesFor1997Configuration(string schema = "dbo")
         {
             ToTable(schema + ".Product Sales for 1997");
-            HasKey(x => new { x.CategoryName, x.ProductName });
+            HasKey(x => new {x.CategoryName, x.ProductName});
 
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
-            Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasPrecision(19,4);
+            Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1036,7 +1102,7 @@ namespace Northwind.EF6Models
         public ProductsByCategoryConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Products by Category");
-            HasKey(x => new { x.CategoryName, x.ProductName, x.Discontinued });
+            HasKey(x => new {x.CategoryName, x.ProductName, x.Discontinued});
 
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
@@ -1045,6 +1111,7 @@ namespace Northwind.EF6Models
             Property(x => x.Discontinued).HasColumnName("Discontinued").IsRequired();
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1056,10 +1123,14 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Region");
             HasKey(x => x.RegionId);
 
-            Property(x => x.RegionId).HasColumnName("RegionID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.RegionId)
+                .HasColumnName("RegionID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.RegionDescription).HasColumnName("RegionDescription").IsRequired().HasMaxLength(50);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1069,14 +1140,15 @@ namespace Northwind.EF6Models
         public SalesByCategoryConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Sales by Category");
-            HasKey(x => new { x.CategoryId, x.CategoryName, x.ProductName });
+            HasKey(x => new {x.CategoryId, x.CategoryName, x.ProductName});
 
             Property(x => x.CategoryId).HasColumnName("CategoryID").IsRequired();
             Property(x => x.CategoryName).HasColumnName("CategoryName").IsRequired().HasMaxLength(15);
             Property(x => x.ProductName).HasColumnName("ProductName").IsRequired().HasMaxLength(40);
-            Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasPrecision(19,4);
+            Property(x => x.ProductSales).HasColumnName("ProductSales").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1086,14 +1158,15 @@ namespace Northwind.EF6Models
         public SalesTotalsByAmountConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".Sales Totals by Amount");
-            HasKey(x => new { x.OrderId, x.CompanyName });
+            HasKey(x => new {x.OrderId, x.CompanyName});
 
-            Property(x => x.SaleAmount).HasColumnName("SaleAmount").IsOptional().HasPrecision(19,4);
+            Property(x => x.SaleAmount).HasColumnName("SaleAmount").IsOptional().HasPrecision(19, 4);
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
             Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasMaxLength(40);
             Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional();
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1105,11 +1178,15 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Shippers");
             HasKey(x => x.ShipperId);
 
-            Property(x => x.ShipperId).HasColumnName("ShipperID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.ShipperId)
+                .HasColumnName("ShipperID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasMaxLength(40);
             Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasMaxLength(24);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1123,9 +1200,10 @@ namespace Northwind.EF6Models
 
             Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional();
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
-            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19,4);
+            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1139,9 +1217,10 @@ namespace Northwind.EF6Models
 
             Property(x => x.ShippedDate).HasColumnName("ShippedDate").IsOptional();
             Property(x => x.OrderId).HasColumnName("OrderID").IsRequired();
-            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19,4);
+            Property(x => x.Subtotal).HasColumnName("Subtotal").IsOptional().HasPrecision(19, 4);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1153,7 +1232,10 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Suppliers");
             HasKey(x => x.SupplierId);
 
-            Property(x => x.SupplierId).HasColumnName("SupplierID").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.SupplierId)
+                .HasColumnName("SupplierID")
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.CompanyName).HasColumnName("CompanyName").IsRequired().HasMaxLength(40);
             Property(x => x.ContactName).HasColumnName("ContactName").IsOptional().HasMaxLength(30);
             Property(x => x.ContactTitle).HasColumnName("ContactTitle").IsOptional().HasMaxLength(30);
@@ -1167,6 +1249,7 @@ namespace Northwind.EF6Models
             Property(x => x.HomePage).HasColumnName("HomePage").IsOptional().HasMaxLength(1073741823);
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
 
@@ -1178,16 +1261,20 @@ namespace Northwind.EF6Models
             ToTable(schema + ".Territories");
             HasKey(x => x.TerritoryId);
 
-            Property(x => x.TerritoryId).HasColumnName("TerritoryID").IsRequired().HasMaxLength(20).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.TerritoryId)
+                .HasColumnName("TerritoryID")
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.TerritoryDescription).HasColumnName("TerritoryDescription").IsRequired().HasMaxLength(50);
             Property(x => x.RegionId).HasColumnName("RegionID").IsRequired();
 
             // Foreign keys
-            HasRequired(a => a.Region).WithMany(b => b.Territories).HasForeignKey(c => c.RegionId); // FK_Territories_Region
+            HasRequired(a => a.Region).WithMany(b => b.Territories).HasForeignKey(c => c.RegionId);
+                // FK_Territories_Region
             InitializePartial();
         }
+
         partial void InitializePartial();
     }
-
 }
-

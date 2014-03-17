@@ -5,10 +5,10 @@ namespace Northwind.WpfClient
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Windows;
+    using Common;
     using Newtonsoft.Json;
     using Northwind.Common;
-    using Northwind.WebApi2Services.Dto;
-    using Northwind.WpfClient.Common;
+    using WebApi2Services.Dto;
 
     internal class MainWindowViewModel : ViewModelBase
     {

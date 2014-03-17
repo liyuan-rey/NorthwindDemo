@@ -1,20 +1,20 @@
 ﻿// ModelMapper.cs
 
-namespace Northwind.WebApi2Services.Models
+namespace Northwind.WebApi2Services.Areas.Warehouse.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Northwind.EF6Models;
-    using Northwind.WebApi2Services.Dto;
+    using Dto;
+    using EF6Models;
 
     public class ModelMapper
     {
-        #region Category, CategoryListDto
+        #region Category, CategoryListItemDto
 
-        public static Expression<Func<Category, CategoryListItemDto>> Category2CategoryListDto =
+        public static Expression<Func<Category, CategoryListItemDto>> Category2CategoryListItemDto =
             c => new CategoryListItemDto
             {
                 CategoryId = c.CategoryId,
@@ -24,10 +24,10 @@ namespace Northwind.WebApi2Services.Models
 
         #endregion
 
-        #region Category, NewCategoryDto
+        #region Category, CategoryNewDto
 
-        public static Expression<Func<Category, NewCategoryDto>> Category2NewCategoryDto =
-            c => new NewCategoryDto
+        public static Expression<Func<Category, CategoryNewDto>> Category2CategoryNewDto =
+            c => new CategoryNewDto
             {
                 CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
@@ -35,7 +35,7 @@ namespace Northwind.WebApi2Services.Models
                 Picture = c.Picture
             };
 
-        public static Expression<Func<NewCategoryDto, Category>> NewCategoryDto2Category =
+        public static Expression<Func<CategoryNewDto, Category>> CategoryNewDto2Category =
             c => new Category
             {
                 CategoryId = c.CategoryId,
@@ -46,10 +46,10 @@ namespace Northwind.WebApi2Services.Models
 
         #endregion
 
-        #region Category, UpdateCategoryDto
+        #region Category, CategoryUpdateDto
 
-        public static Expression<Func<Category, UpdateCategoryDto>> Category2UpdateCategoryDto =
-            c => new UpdateCategoryDto
+        public static Expression<Func<Category, CategoryUpdateDto>> Category2CategoryUpdateDto =
+            c => new CategoryUpdateDto
             {
                 CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
@@ -57,7 +57,7 @@ namespace Northwind.WebApi2Services.Models
                 Picture = c.Picture
             };
 
-        public static Expression<Func<UpdateCategoryDto, Category>> UpdateCategoryDto2Category =
+        public static Expression<Func<CategoryUpdateDto, Category>> CategoryUpdateDto2Category =
             c => new Category
             {
                 CategoryId = c.CategoryId,
@@ -65,6 +65,23 @@ namespace Northwind.WebApi2Services.Models
                 Description = c.Description,
                 Picture = c.Picture
             };
+
+        #endregion
+
+        #region Product, ProductListItemDto
+
+        public static Expression<Func<Product, ProductListItemDto>> Product2ProductListItemDto =
+            p => new ProductListItemDto
+            {
+                ProductId = p.ProductId,
+                ProductName = p.ProductName,
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category.CategoryName,
+                Discontinued = p.Discontinued,
+                UnitPrice = p.UnitPrice
+            };
+
+        #endregion
 
         public static TDestination Map<TSource, TDestination>(TSource source, IEnumerable<string> properties)
         {
@@ -112,7 +129,5 @@ namespace Northwind.WebApi2Services.Models
 
             return result;
         }
-
-        #endregion
     }
 }

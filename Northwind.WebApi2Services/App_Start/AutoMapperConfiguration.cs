@@ -8,6 +8,8 @@ namespace Northwind.WebApi2Services
     {
         public static void Configure()
         {
+            //Mapper.CreateMap<Product, ProductListItemDto>();
+
             Mapper.AssertConfigurationIsValid();
         }
     }

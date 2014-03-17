@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// AccountViewModels.cs
 
 namespace Northwind.Mvc5App.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

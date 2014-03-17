@@ -1,26 +1,24 @@
-﻿using System.Web.Mvc;
+﻿// WarehouseAreaRegistration.cs
 
 namespace Northwind.WebApi2Services.Areas.Warehouse
 {
     using System.Web.Http;
+    using System.Web.Mvc;
 
-    public class WarehouseAreaRegistration : AreaRegistration 
+    public class WarehouseAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
-            {
-                return "Warehouse";
-            }
+            get { return "Warehouse"; }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.Routes.MapHttpRoute(
                 "WarehouseApi",
                 "api/Warehouse/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+                new {id = RouteParameter.Optional}
+                );
             //context.MapRoute(
             //    "Warehouse_default",
             //    "Warehouse/{controller}/{action}/{id}",

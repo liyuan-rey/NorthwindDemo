@@ -1,9 +1,14 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿// Startup.cs
 
-[assembly: OwinStartupAttribute(typeof(Northwind.Mvc5App.Startup))]
+using Microsoft.Owin;
+using Northwind.Mvc5App;
+
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace Northwind.Mvc5App
 {
+    using Owin;
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

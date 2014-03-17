@@ -3,20 +3,51 @@
 namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 {
     using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
     using System.Web.Http;
+    using Dto;
+    using EF6Models;
+    using Filters;
+    using Models;
 
+    [UnhandledExceptionFilter]
     public class ProductController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<ProductListItemDto>> Get()
         {
-            return new[] { "value1", "value2" };
+            using (var ctx = new NorthwindDbContext())
+            {
+                List<ProductListItemDto> result = await ctx.Products
+                    .Include(p => p.Category)
+                    .Select(ModelMapper.Product2ProductListItemDto)
+                    .ToListAsync();
+
+                return result;
+            }
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public async Task<ProductListItemDto> Get(int id)
         {
-            return "value";
+            using (var ctx = new NorthwindDbContext())
+            {
+                ProductListItemDto result = await ctx.Products
+                    .Select(ModelMapper.Product2ProductListItemDto)
+                    .FirstOrDefaultAsync(p => p.ProductId == id);
+
+                if (result == null)
+                {
+                    throw new HttpResponseException(
+                        Request.CreateResponse(HttpStatusCode.NotFound));
+                }
+
+                return result;
+            }
         }
 
         // POST api/<controller>

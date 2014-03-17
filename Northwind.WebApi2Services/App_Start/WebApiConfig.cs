@@ -9,7 +9,7 @@ namespace Northwind.WebApi2Services
     using System.Net.Http;
     using System.Security;
     using System.Web.Http;
-    using Northwind.WebApi2Services.Filters;
+    using Filters;
 
     public static class WebApiConfig
     {
@@ -42,7 +42,7 @@ namespace Northwind.WebApi2Services
 
             config.Routes.MapHttpRoute(
                 "DefaultApi", "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
+                new {id = RouteParameter.Optional}
                 );
         }
     }

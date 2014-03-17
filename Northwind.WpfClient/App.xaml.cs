@@ -6,8 +6,8 @@ namespace Northwind.WpfClient
     using System.Configuration;
     using System.Windows;
     using System.Windows.Threading;
-    using Northwind.WpfClient.Common;
-    using Northwind.WpfClient.Properties;
+    using Common;
+    using Properties;
 
     /// <summary>
     ///     App.xaml 的交互逻辑

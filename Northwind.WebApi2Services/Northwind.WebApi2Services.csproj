@@ -132,10 +132,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
-      <Link>AutoMapper.Net4.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_Data\northwnd.mdf" />
     <Content Include="App_Data\northwnd.ldf">
       <DependentUpon>northwnd.mdf</DependentUpon>
@@ -180,7 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelMapper.cs" />
+    <Compile Include="Areas\Warehouse\Models\ModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +193,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Warehouse\Models\" />
     <Folder Include="Areas\Warehouse\Views\Shared\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Northwind.EF6Models\Northwind.EF6Models.csproj">

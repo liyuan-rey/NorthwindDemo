@@ -1,8 +1,8 @@
-﻿// ProductListDto.cs
+﻿// ProductListItemDto.cs
 
 namespace Northwind.WebApi2Services.Dto
 {
-    public class ProductListDto
+    public class ProductListItemDto
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

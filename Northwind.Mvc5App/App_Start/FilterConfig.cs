@@ -1,8 +1,9 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿// FilterConfig.cs
 
 namespace Northwind.Mvc5App
 {
+    using System.Web.Mvc;
+
     public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

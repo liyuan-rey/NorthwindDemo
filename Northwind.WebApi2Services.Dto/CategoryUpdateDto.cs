@@ -1,10 +1,10 @@
-﻿// UpdateCategoryDto.cs
+﻿// CategoryUpdateDto.cs
 
 namespace Northwind.WebApi2Services.Dto
 {
     using System.Collections.Generic;
 
-    public class UpdateCategoryDto
+    public class CategoryUpdateDto
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }

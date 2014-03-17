@@ -25,10 +25,10 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
             {
                 ctx.Configuration.ProxyCreationEnabled = false;
 
-                List<CategoryListItemDto> result = 
+                List<CategoryListItemDto> result =
                     await ctx.Categories
-                             .Select(ModelMapper.Category2CategoryListDto)
-                             .ToListAsync();
+                        .Select(ModelMapper.Category2CategoryListItemDto)
+                        .ToListAsync();
 
                 return result;
             }
@@ -40,8 +40,8 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
             using (var ctx = new NorthwindDbContext())
             {
                 CategoryListItemDto result = await ctx.Categories.AsNoTracking()
-                                                      .Select(ModelMapper.Category2CategoryListDto)
-                                                      .FirstOrDefaultAsync(c => c.CategoryId == id);
+                    .Select(ModelMapper.Category2CategoryListItemDto)
+                    .FirstOrDefaultAsync(c => c.CategoryId == id);
 
                 if (result == null)
                 {
@@ -54,7 +54,7 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         }
 
         // POST api/<controller>
-        public async Task Post([FromBody] NewCategoryDto value)
+        public async Task Post([FromBody] CategoryNewDto value)
         {
             if (!ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 
             using (var ctx = new NorthwindDbContext())
             {
-                Func<NewCategoryDto, Category> func = ModelMapper.NewCategoryDto2Category.Compile();
+                Func<CategoryNewDto, Category> func = ModelMapper.CategoryNewDto2Category.Compile();
                 Category categoty = func(value);
 
                 ctx.Categories.Add(categoty);
@@ -74,7 +74,7 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         }
 
         // PUT api/<controller>/5
-        public async Task Put(int id, [FromBody] UpdateCategoryDto value)
+        public async Task Put(int id, [FromBody] CategoryUpdateDto value)
         {
             if (!ModelState.IsValid)
             {
@@ -84,13 +84,13 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 
             using (var ctx = new NorthwindDbContext())
             {
-                Func<UpdateCategoryDto, Category> func = ModelMapper.UpdateCategoryDto2Category.Compile();
+                Func<CategoryUpdateDto, Category> func = ModelMapper.CategoryUpdateDto2Category.Compile();
                 Category categoty = func(value);
 
                 ctx.Categories.Attach(categoty);
 
                 value.UpdatedProperties.ForEach(prop =>
-                                                ctx.Entry(categoty).Property(prop).IsModified = true);
+                    ctx.Entry(categoty).Property(prop).IsModified = true);
 
                 await ctx.SaveChangesAsync();
             }

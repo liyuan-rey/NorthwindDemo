@@ -1,4 +1,4 @@
-﻿// NorthwindDbContext.storproc.cs
+﻿// NorthwindDbContext.partial.cs
 
 namespace Northwind.EF6Models
 {
@@ -8,6 +8,13 @@ namespace Northwind.EF6Models
 
     public partial class NorthwindDbContext
     {
+        partial void InitializePartial()
+        {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+        }
+
         public virtual ObjectResult<CustOrderHist_Result> CustOrderHist(string customerID)
         {
             ObjectParameter customerIDParameter = customerID != null

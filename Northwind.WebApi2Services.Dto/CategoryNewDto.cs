@@ -1,8 +1,8 @@
-﻿// NewCategoryDto.cs
+﻿// CategoryNewDto.cs
 
 namespace Northwind.WebApi2Services.Dto
 {
-    public class NewCategoryDto
+    public class CategoryNewDto
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }

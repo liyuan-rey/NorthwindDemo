@@ -59,7 +59,7 @@ namespace Northwind.Common
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i] == null)
-                    throw new ArgumentNullException(string.Format("{0}[{1}]", new object[] { listName, i }));
+                    throw new ArgumentNullException(string.Format("{0}[{1}]", new object[] {listName, i}));
             }
         }
 

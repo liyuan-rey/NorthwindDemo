@@ -1,24 +1,23 @@
-﻿using System.Web.Mvc;
+﻿// WarehouseAreaRegistration.cs
 
 namespace Northwind.Mvc5App.Areas.Warehouse
 {
-    public class WarehouseAreaRegistration : AreaRegistration 
+    using System.Web.Mvc;
+
+    public class WarehouseAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
-            {
-                return "Warehouse";
-            }
+            get { return "Warehouse"; }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Warehouse_default",
                 "Warehouse/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new {action = "Index", id = UrlParameter.Optional}
+                );
         }
     }
 }

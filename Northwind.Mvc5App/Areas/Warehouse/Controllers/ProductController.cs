@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Northwind.EF6Models;
+﻿// ProductController.cs
 
 namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using EF6Models;
+
     public class ProductController : Controller
     {
-        private NorthwindDbContext db = new NorthwindDbContext();
+        private readonly NorthwindDbContext db = new NorthwindDbContext();
 
         // GET: /Warehouse/Product/
         public async Task<ActionResult> Index()
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
+            IQueryable<Product> products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
             return View(await products.ToListAsync());
         }
 
@@ -29,7 +27,7 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await ((DbSet<Product>)db.Products).FindAsync(id);
+            Product product = await ((DbSet<Product>) db.Products).FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -50,7 +48,11 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Product product)
+        public async Task<ActionResult> Create(
+            [Bind(
+                Include =
+                    "ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued"
+                )] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +73,7 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await ((DbSet<Product>)db.Products).FindAsync(id);
+            Product product = await ((DbSet<Product>) db.Products).FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -86,7 +88,11 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Product product)
+        public async Task<ActionResult> Edit(
+            [Bind(
+                Include =
+                    "ProductId,ProductName,SupplierId,CategoryId,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued"
+                )] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +112,7 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await ((DbSet<Product>)db.Products).FindAsync(id);
+            Product product = await ((DbSet<Product>) db.Products).FindAsync(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -119,7 +125,7 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Product product = await ((DbSet<Product>)db.Products).FindAsync(id);
+            Product product = await ((DbSet<Product>) db.Products).FindAsync(id);
             db.Products.Remove(product);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

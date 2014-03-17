@@ -1230,6 +1230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Warehouse\Models\" />
+    <Folder Include="Areas\Warehouse\Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
