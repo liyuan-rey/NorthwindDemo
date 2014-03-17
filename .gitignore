@@ -155,4 +155,5 @@ $RECYCLE.BIN/
 .DS_Store
 
 # Custom ignore settings
+*.bak
 /Northwind.EF6Models.old

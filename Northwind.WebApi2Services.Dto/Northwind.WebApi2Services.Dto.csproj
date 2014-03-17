@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CategoryListItemDto.cs" />
     <Compile Include="CategoryNewDto.cs" />
+    <Compile Include="NorthwindApi.cs" />
     <Compile Include="ProductNewDto.cs" />
     <Compile Include="ProductListItemDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

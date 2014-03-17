@@ -22,12 +22,11 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         {
             using (var ctx = new NorthwindDbContext())
             {
-                List<ProductListItemDto> result = await ctx.Products
+                IQueryable<ProductListItemDto> items = ctx.Products
                     .Include(p => p.Category)
-                    .Select(ModelMapper.Product2ProductListItemDto)
-                    .ToListAsync();
+                    .Select(ModelMapper.Product2ProductListItemDto);
 
-                return result;
+                return await items.ToListAsync();
             }
         }
 
@@ -36,9 +35,10 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         {
             using (var ctx = new NorthwindDbContext())
             {
-                ProductListItemDto result = await ctx.Products
-                    .Select(ModelMapper.Product2ProductListItemDto)
-                    .FirstOrDefaultAsync(p => p.ProductId == id);
+                IQueryable<ProductListItemDto> items = ctx.Products
+                    .Select(ModelMapper.Product2ProductListItemDto);
+                    
+                ProductListItemDto result = await items.FirstOrDefaultAsync(p => p.ProductId == id);
 
                 if (result == null)
                 {

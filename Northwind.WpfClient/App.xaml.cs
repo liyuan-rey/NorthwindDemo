@@ -8,6 +8,7 @@ namespace Northwind.WpfClient
     using System.Windows.Threading;
     using Common;
     using Properties;
+    using WebApi2Services.Dto;
 
     /// <summary>
     ///     App.xaml 的交互逻辑
@@ -20,7 +21,7 @@ namespace Northwind.WpfClient
             {
                 DispatcherUnhandledException += App_DispatcherUnhandledException;
 
-                NorthwindApi.StringBaseAddress = Settings.Default.BaseAddress;
+                NorthwindApi.StringBaseAddress = Settings.Default.WebApiBaseAddress;
                 if (string.IsNullOrWhiteSpace(NorthwindApi.StringBaseAddress))
                     throw new ConfigurationErrorsException("无效的 BaseAddress 配置数据.");
 

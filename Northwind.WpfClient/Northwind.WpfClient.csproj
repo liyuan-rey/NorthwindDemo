@@ -77,7 +77,6 @@
     <Compile Include="Common\AsyncRelayCommand.cs" />
     <Compile Include="Common\HttpClientHelper.cs" />
     <Compile Include="Common\IActiveAware.cs" />
-    <Compile Include="Common\NorthwindApi.cs" />
     <Compile Include="Common\ObservableCollectionEx.cs" />
     <Compile Include="Common\PropertyChangedEventHandlerExtensions.cs" />
     <Compile Include="Common\RelayCommand.cs" />

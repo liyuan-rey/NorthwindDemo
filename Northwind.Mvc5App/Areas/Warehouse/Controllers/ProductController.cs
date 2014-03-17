@@ -2,12 +2,16 @@
 
 namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using EF6Models;
+    using Newtonsoft.Json;
+    using WebApi2Services.Dto;
 
     public class ProductController : Controller
     {
@@ -16,8 +20,34 @@ namespace Northwind.Mvc5App.Areas.Warehouse.Controllers
         // GET: /Warehouse/Product/
         public async Task<ActionResult> Index()
         {
-            IQueryable<Product> products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await products.ToListAsync());
+            return View();
+        }
+
+        // GET: /Warehouse/Product/Index2
+        public async Task<ActionResult> Index2()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(NorthwindApi.StringGetProductList);
+                    response.EnsureSuccessStatusCode(); // Throw on error code.
+
+                    IEnumerable<ProductListItemDto> products =
+                        await response.Content.ReadAsAsync<IEnumerable<ProductListItemDto>>();
+
+                    return View(products);
+                }
+            }
+            catch (JsonException jEx)
+            {
+                // This exception indicates a problem deserializing the request body.
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, jEx.Message);
+            }
+            catch (HttpRequestException ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
 
         // GET: /Warehouse/Product/Details/5

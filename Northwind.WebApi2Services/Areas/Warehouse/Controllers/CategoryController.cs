@@ -23,14 +23,10 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         {
             using (var ctx = new NorthwindDbContext())
             {
-                ctx.Configuration.ProxyCreationEnabled = false;
+                IQueryable<CategoryListItemDto> items = ctx.Categories
+                        .Select(ModelMapper.Category2CategoryListItemDto);
 
-                List<CategoryListItemDto> result =
-                    await ctx.Categories
-                        .Select(ModelMapper.Category2CategoryListItemDto)
-                        .ToListAsync();
-
-                return result;
+                return await items.ToListAsync();
             }
         }
 
@@ -39,9 +35,10 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
         {
             using (var ctx = new NorthwindDbContext())
             {
-                CategoryListItemDto result = await ctx.Categories.AsNoTracking()
-                    .Select(ModelMapper.Category2CategoryListItemDto)
-                    .FirstOrDefaultAsync(c => c.CategoryId == id);
+                IQueryable<CategoryListItemDto> items = ctx.Categories.AsNoTracking()
+                    .Select(ModelMapper.Category2CategoryListItemDto);
+
+                CategoryListItemDto result = await items.FirstOrDefaultAsync(c => c.CategoryId == id);
 
                 if (result == null)
                 {
@@ -64,6 +61,7 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 
             using (var ctx = new NorthwindDbContext())
             {
+                //TODO cache compiled expression for speed, or direct generate func in ModelMapper
                 Func<CategoryNewDto, Category> func = ModelMapper.CategoryNewDto2Category.Compile();
                 Category categoty = func(value);
 
@@ -84,6 +82,7 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers
 
             using (var ctx = new NorthwindDbContext())
             {
+                //TODO cache compiled expression for speed, or direct generate func in ModelMapper
                 Func<CategoryUpdateDto, Category> func = ModelMapper.CategoryUpdateDto2Category.Compile();
                 Category categoty = func(value);
 
