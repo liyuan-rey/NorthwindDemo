@@ -8,15 +8,12 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<div id ="productlist"></div>
+<div id ="productGrid"></div>
     
 
 
 @section Scripts {
     @*@Scripts.Render("~/bundles/jqueryval")*@
-    @Scripts.Render("~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.zh-Hans.min.js")
-    @Scripts.Render("~/Scripts/kendo/2013.3.1119/kendo.web.min.js")
-    @Scripts.Render("~/Scripts/kendo/2013.3.1119/kendo.grid.min.js")
 
     @Scripts.Render("~/Areas/Warehouse/Scripts/productlist.js")
 
@@ -27,9 +24,27 @@
         });
 
         function initProductGrid() {
-            $("#productlist").kendoGrid({
-                columns: ["name", "age"], // two columns bound to the "name" and "age" fields
-                dataSource: [{ name: "Jane", age: 31 }, { name: "John", age: 33 }]
+            $("#productGrid").kendoGrid({
+                dataSource: {
+                    type: "odata",
+                    serverPaging: true,
+                    serverSorting: true,
+                    pageSize: 100,
+                    transport: {
+                        read: "http://localhost:52279/api/warehouse/product"
+                    }
+                },
+                height: 430,
+                scrollable: {
+                    virtual: true
+                },
+                sortable: true,
+                columns: [
+                    { field: "CategoryName", title: "Order ID", width: 110 },
+                    { field: "ProductName", title: "Customer ID", width: 280 },
+                    { field: "UnitPrice", title: "Ship Name", width: 90 },
+                    { field: "Discontinued", title: "Ship Address", width: 60 }
+                ]
             });
         }
     </script>

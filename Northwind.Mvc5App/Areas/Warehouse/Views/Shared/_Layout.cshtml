@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - My ASP.NET Application</title>
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/kendo/2013.3.1119/kendo.common-bootstrap.min.css")
+        @Styles.Render("~/Content/kendo/2013.3.1119/kendo.bootstrap.min.css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
@@ -35,6 +37,8 @@
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Scripts/kendo/2013.3.1119/kendo.web.min.js")
+        @Scripts.Render("~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.zh-Hans.min.js")
         @RenderSection("scripts", false)
     </body>
 </html>

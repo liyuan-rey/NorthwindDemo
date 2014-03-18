@@ -9,6 +9,9 @@ namespace Northwind.WebApi2Services
     using System.Net.Http;
     using System.Security;
     using System.Web.Http;
+    using System.Web.Http.OData.Builder;
+    using Dto;
+    using EF6Models;
     using Filters;
 
     public static class WebApiConfig
@@ -44,6 +47,15 @@ namespace Northwind.WebApi2Services
                 "DefaultApi", "api/{controller}/{id}",
                 new {id = RouteParameter.Optional}
                 );
+
+            //OData configuration and routes
+            var builder = new ODataConventionModelBuilder();
+            builder.EntitySet<ProductListItemDto>("ProductListItemDto");
+            //builder.EntitySet<Category>("Categories");
+            //builder.EntitySet<OrderDetail>("OrderDetail");
+            //builder.EntitySet<Supplier>("Suppliers");
+            config.Routes.MapODataRoute("ODataRoute", "odata", builder.GetEdmModel());
+
         }
     }
 }
