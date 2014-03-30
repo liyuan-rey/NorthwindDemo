@@ -34,14 +34,11 @@ namespace Northwind.WebApi2Services.Areas.Warehouse.Controllers.OData
         [Queryable]
         public IQueryable<ProductListItemDto> GetProductListItemDto()
         {
-            using (var ctx = new NorthwindDbContext())
-            {
-                IQueryable<ProductListItemDto> items = ctx.Products
-                    .Include(p => p.Category)
-                    .Select(ModelMapper.Product2ProductListItemDto);
+            IQueryable<ProductListItemDto> items = _db.Products
+                .Include(p => p.Category)
+                .Select(ModelMapper.Product2ProductListItemDto);
 
-                return items;
-            }
+            return items;
         }
 
         // GET odata/Product(5)
